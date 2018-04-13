@@ -44,3 +44,13 @@ process.once('SIGUSR2', () => {
             process.kill(process.pid, 'SIGUSR2');
         })
 });
+
+// Load Schema Models
+//
+
+require('../models/auction');
+require('../models/bid'); 
+require('../models/book'); 
+require('../models/user');
+
+
