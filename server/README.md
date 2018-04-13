@@ -14,3 +14,6 @@ Web server for the BidBox application
 
 ## Testing on computer
 1. Using a web browser, go to http://localhost:3000/test
+
+## API Documentation
+* [Swagger doc](https://app.swaggerhub.com/apis/TaiwoO/BidBoxAPI/1.0.0-oas3#/)
