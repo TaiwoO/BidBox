@@ -8,6 +8,7 @@ Web server for the BidBox application
 ## Getting Started
 1. Navigate to the project directory and run 'npm install'
 2. Start the server with 'npm start'
+3. Start the mongoDB server by running 'mongod' on a seperate shell
 
 ## Testing on phone
 1. Find your computer's ip addresss and enter the following into a browser: "COMPUTER IP GOES HERE":3000/test
