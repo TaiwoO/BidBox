@@ -5,11 +5,13 @@ const auctionSchema = new Schema({
 
     book: {
         type: Schema.Types.ObjectId,
-        ref: 'Book'
+        ref: 'Book',
+        required: true
     },
     seller: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     bids: [{
         type: Schema.Types.ObjectId,
@@ -19,4 +21,4 @@ const auctionSchema = new Schema({
     endDate: Date
 });
 
-mongoose.model('Auction', auctionSchema); // compile schema into a Model
+module.exports = mongoose.model('Auction', auctionSchema); // compile schema into a Model

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const config = require('../config/config-constants')
 
 const userSchema = new Schema({
     username: {
@@ -44,7 +45,7 @@ userSchema.methods.generateJwt = () => {
         _id: this._id,
         username: this.username,
         expiration: parseInt(expiry.getTime() / 1000)
-    }, 'This secret should acually be hidden in like an environment variable or somthing but will leave it like this for now');
+    }, config.SECRET);
 }
 
-mongoose.model('User', userSchema); // compile schema into a Model
+module.exports = mongoose.model('User', userSchema); // compile schema into a Model

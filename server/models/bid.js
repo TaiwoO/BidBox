@@ -5,9 +5,10 @@ const Schema = mongoose.Schema;
 const bidSchema = new Schema({
     bidder: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     price: Number
 });
 
-mongoose.model('Bid', bidSchema); // compile schema into a Model
+module.exports = mongoose.model('Bid', bidSchema); // compile schema into a Model

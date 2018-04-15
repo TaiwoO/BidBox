@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const dbURI = 'mongodb://localhost/BidBox';
+const config = require('./config-constants');
+
+
+let dbURI = config.DATABASE;
 
 // if (process.env.NODE_ENV === 'production') {
 //     dbURI = process.env.THE_PRODUCTION_dB_URI 
@@ -44,13 +47,5 @@ process.once('SIGUSR2', () => {
             process.kill(process.pid, 'SIGUSR2');
         })
 });
-
-// Load Schema Models
-//
-
-require('../models/auction');
-require('../models/bid'); 
-require('../models/book'); 
-require('../models/user');
 
 

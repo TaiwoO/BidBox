@@ -10,7 +10,8 @@ const bookSchema = new Schema({
     },
     owner: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     version: String,
     condition: String,
@@ -19,4 +20,4 @@ const bookSchema = new Schema({
 
 });
 
-mongoose.model('Book', bookSchema); // compile schema into a Model
+module.exports = mongoose.model('Book', bookSchema); // compile schema into a Model
