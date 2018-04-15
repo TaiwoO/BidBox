@@ -61,7 +61,14 @@ function register(req, res, next) {
 };
 
 function login(req, res) {
+    // No validation required since it is already hanndled in password's local login stragtegy
 
+    const publicUserInfo = User.getPublicInfo(req.user);
+
+    _sendJsonResponse(res, 200, {
+        token: 'JWT' + _generateUserToken(publicUserInfo),
+        user: publicUserInfo
+    });
 };
 
 // ========================================================

@@ -3,7 +3,9 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-require('./config/db'); // will start the database connection. Should be required before routes
+const passport = require('passport');
+require('./config/passport'); // will add the passport strategy middeware. Should be done before routes
+require('./config/db'); // will start the database connection. Should be done before routes
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -24,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
