@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
-const config = require('../config/config-constants')
+// const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new Schema({
-    username: {
-        type: String,
-        unique: true,
-        required: true
-    },
+    // username: {
+    //     type: String,
+    //     unique: true,
+    //     required: true
+    // },
     email: {
         type: String,
         unique: true,
@@ -23,29 +22,48 @@ const userSchema = new Schema({
         ref: 'Auction'
     }],
 
-    hash: String,
-    salt: String
+    password: {
+        type: String,
+        required: true
+    }
+},
+    {
+        timestamps: true
+    });
+
+// Pre-save of user to database, hash password if password is modified or new
+
+userSchema.pre('save', function (next) {
+    const user = this;
+    const SALT_FACTOR = 5;
+
+    if (!user.isModified('password'))
+        return next();
+
+    bcrypt.genSalt(SALT_FACTOR, function (err, salt) {
+        if (err) return next(err);
+
+        bcrypt.hash(user.password, salt, function (err, hash) {
+            if (err) return next(err);
+            user.password = hash;
+            next();
+        });
+    });
 });
 
-userSchema.methods.setPassword = (password) => {
-    this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+
+userSchema.methods.validatePassword = function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password)
 }
 
-userSchema.methods.isValidPassword = (password) => {
-    let passwordHash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-    return this.hash === passwordHash;
+userSchema.statics.getPublicInfo = function(user) { // static method
+    return {
+        _id: user._id,
+        // username: user.username,
+        email: user.email,
+        books: user.books,
+        auctions: user.auctions
+    };
 }
 
-userSchema.methods.generateJwt = () => {
-    let expiry = new Date();
-    expiry.setDate(expiry.getDate() + 31);
-
-    return jwt.sign({
-        _id: this._id,
-        username: this.username,
-        expiration: parseInt(expiry.getTime() / 1000)
-    }, config.SECRET);
-}
-
-module.exports = mongoose.model('User', userSchema); // compile schema into a Model
+module.exports = mongoose.model('User', userSchema); // compile schema into a Model 
