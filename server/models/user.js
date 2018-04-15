@@ -52,11 +52,15 @@ userSchema.pre('save', function (next) {
 });
 
 
-userSchema.methods.validatePassword = function (candidatePassword) {
-    return bcrypt.compare(candidatePassword, this.password)
+userSchema.methods.validatePassword = function (candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+        if (err) { return cb(err); }
+
+        cb(null, isMatch);
+    });
 }
 
-userSchema.statics.getPublicInfo = function(user) { // static method
+userSchema.statics.getPublicInfo = function (user) { // static method
     return {
         _id: user._id,
         // username: user.username,
