@@ -1,17 +1,5 @@
 
 
-/**
- *  ============================================ REQUEST INTERCEPTIONS ====================================================
- */
-
-function register(req, res) {
-
-};
-
-function login(req, res) {
-
-};
-
 function addBook(req, res) {
 
 };
@@ -43,8 +31,6 @@ function updateAuction(req, res) {
 // ========================================================
 
 module.exports = {
-    register: register,
-    login: login,
     addBook: addBook,
     deleteBook: deleteBook,
     getUser: getUser,

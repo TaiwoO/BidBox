@@ -6,6 +6,7 @@ const logger = require('morgan');
 require('./config/db'); // will start the database connection. Should be required before routes
 
 const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
 const auctionRouter = require('./routes/auction');
 const bidRouter = require('./routes/bid');
 const bookRouter = require('./routes/book');
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 app.use('/auction', auctionRouter);
 app.use('/bid', bidRouter);
 app.use('/book', bookRouter);

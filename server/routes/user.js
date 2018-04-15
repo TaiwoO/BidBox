@@ -7,8 +7,6 @@ router.get('/', function (req, res, next) {
   res.send("welcome to the user's route");
 });
 
-router.post('/register', userCtrl.register);
-router.post('/login', userCtrl.login);
 router.post('/book', userCtrl.addBook);
 router.delete('/book/:bookid', userCtrl.deleteBook);
 router.get('/:userid', userCtrl.getUser);
