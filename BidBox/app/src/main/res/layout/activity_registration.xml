@@ -12,9 +12,8 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <!-- Username Text Input -->
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -25,16 +24,33 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <!-- DisplayName Text Input -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 
             <EditText
-                android:id="@+id/text_loginUsername"
+                android:id="@+id/text_registerDisplayName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Username" />
+                android:hint="Display Name"
+                android:inputType="text"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Username Text Input (for Registration) -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/text_registerUsername"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Username"
+                android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Text Input -->
@@ -44,7 +60,7 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/text_loginPassword"
+                android:id="@+id/text_registerPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Password"
@@ -52,18 +68,20 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/button_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Login" />
-
-        <Button
-            android:id="@+id/button_goToRegister"
+            android:id="@+id/button_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Register an Account" />
+
+        <Button
+            android:id="@+id/button_goToLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Go to Login" />
+
     </LinearLayout>
+
 
 </ScrollView>
