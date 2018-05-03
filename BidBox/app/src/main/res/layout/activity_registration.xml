@@ -31,26 +31,12 @@
             android:layout_marginTop="20dp">
 
             <EditText
-                android:id="@+id/text_registerDisplayName"
+                android:id="@+id/text_registerEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Display Name"
+                android:hint="Email"
                 android:inputType="text"/>
 
-        </android.support.design.widget.TextInputLayout>
-
-        <!-- Username Text Input (for Registration) -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <EditText
-                android:id="@+id/text_registerUsername"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Username"
-                android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Text Input -->
