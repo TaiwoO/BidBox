@@ -68,7 +68,7 @@ function login(req, res) {
     const publicUserInfo = User.getPublicInfo(req.user);
 
     _sendJsonResponse(res, 200, {
-        token: 'JWT' + _generateUserToken(publicUserInfo),
+        token: 'JWT ' + _generateUserToken(publicUserInfo),
         user: publicUserInfo
     });
 };
