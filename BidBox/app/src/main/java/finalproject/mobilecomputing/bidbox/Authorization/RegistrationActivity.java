@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
+import finalproject.mobilecomputing.bidbox.HomeActivity;
 import finalproject.mobilecomputing.bidbox.R;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://631babc0.ngrok.io/auth/register";
+        final String url ="https://8426ed93.ngrok.io/auth/register";
 
         register_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Context context = getApplicationContext();
                                 Toast toast = Toast.makeText(context, response, Toast.LENGTH_LONG);
                                 toast.show();
+                                gotoHomeActivity();
                             }
                         },
                         new Response.ErrorListener() {
@@ -89,5 +91,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 startActivity(loginIntent);
             }
         });
+    }
+
+    private void gotoHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 }
