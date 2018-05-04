@@ -9,6 +9,7 @@ const userSchema = new Schema({
     //     unique: true,
     //     required: true
     // },
+    name: String,
     email: {
         type: String,
         unique: true,
@@ -64,6 +65,7 @@ userSchema.statics.getPublicInfo = function (user) { // static method
     return {
         _id: user._id,
         // username: user.username,
+        name: user.name,
         email: user.email,
         books: user.books,
         auctions: user.auctions

@@ -7,13 +7,14 @@ router.get('/', function (req, res, next) {
   res.send("welcome to the user's route");
 });
 
-router.post('/book', userCtrl.addBook);
-router.delete('/book/:bookid', userCtrl.deleteBook);
 router.get('/:userid', userCtrl.getUser);
-router.get('/:userid/book', userCtrl.getBooks);
+router.get('/:userid/auction', userCtrl.getAuctions);
+router.get('/:userid/bid', userCtrl.getBids);
 router.post('/auction', userCtrl.addAuction);
+router.post('/bid', userCtrl.addBid);
 router.delete('/auction/:auctionid', userCtrl.deleteAuction);
+router.delete('/bid/:bidid', userCtrl.deleteBid);
 router.put('/auction/:auctionid', userCtrl.updateAuction);
-
+router.put('/bid/:bidid', userCtrl.updateBid);
 
 module.exports = router;

@@ -15,6 +15,7 @@ const bookSchema = new Schema({
     },
     version: String,
     condition: String,
+    isbn: String,
     img: Buffer,
     imgUrl: String,
 

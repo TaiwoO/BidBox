@@ -30,6 +30,7 @@ function _generateUserToken(user) {
  */
 
 function register(req, res, next) {
+    const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
 
@@ -43,6 +44,7 @@ function register(req, res, next) {
         if (user) { return _sendJsonResponse(res, 422, { "message": "email already exisits" }); }
 
         let newUser = new User({
+            name: name,
             email: email,
             password: password
         });

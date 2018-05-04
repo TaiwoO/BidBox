@@ -1,41 +1,64 @@
 
 
-function addBook(req, res) {
+/**
+ *  ============================================ REQUEST INTERCEPTIONS ====================================================
+ */
 
-};
-
-function deleteBook(req, res) {
-
-};
-
+// TODO:
 function getUser(req, res) {
 
 };
 
-function getBooks(req, res) {
+// TODO:
+function getAuctions(req, res) {
 
 };
 
+// TODO:
+function getBids(req, res) {
+
+};
+
+// TODO:
 function addAuction(req, res) {
 
 };
 
+// TODO:
+function addBid(req, res) {
+
+};
+
+// TODO:
 function deleteAuction(req, res) {
 
 };
 
+// TODO:
+function deleteBid(req, res) {
+
+};
+
+// TODO:
 function updateAuction(req, res) {
 
 };
 
+// TODO: 
+function updateBid(req, res) {
+
+}
+
 // ========================================================
 
 module.exports = {
-    addBook: addBook,
-    deleteBook: deleteBook,
     getUser: getUser,
-    getBooks: getBooks,
+    getAuctions: getAuctions,
+    getBids: getBids,
     addAuction: addAuction,
+    addBid: addBid,
     deleteAuction: deleteAuction,
-    updateAuction: updateAuction
+    deleteBid: deleteBid,
+    updateAuction: updateAuction,
+    updateBid: updateBid
 };
