@@ -8,11 +8,6 @@ const bookSchema = new Schema({
         required: true,
         index: true
     },
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
     version: String,
     condition: String,
     isbn: String,

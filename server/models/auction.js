@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const auctionSchema = new Schema({
 
-    book: {
+    bookid: {
         type: Schema.Types.ObjectId,
         ref: 'Book',
         required: true
     },
-    seller: {
+    userid: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -17,7 +17,7 @@ const auctionSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Bid'
     }],
-    startDate: Date,
+    startDate: Date || Date.now,
     endDate: Date
 });
 
