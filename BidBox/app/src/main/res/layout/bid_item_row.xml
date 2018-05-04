@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/bid_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Organic Chemistry 1 10th Edition"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/bid_item_isbn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ISBN# 472854865 "
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/bid_item_img"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/book1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bid_item_bid_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/roundedbutton"
+            android:text="BID"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/bid_item_addToChart_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/roundedbutton"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:text="ADD TO CHART"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:src="@drawable/ic_comment_white_24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="34"
+                android:textColor="@android:color/white"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
