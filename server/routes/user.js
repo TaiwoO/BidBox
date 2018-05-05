@@ -14,7 +14,7 @@ router.get('/:userid', userCtrl.getUser);
 router.get('/:userid/auction', userCtrl.getAuctions);
 router.get('/:userid/bid', userCtrl.getBids);
 router.post('/auction', requireJwtAuth, userCtrl.addAuction);
-router.post('/bid', requireJwtAuth, userCtrl.addBid);
+router.post('/auction/:auctionid/bid', requireJwtAuth, userCtrl.addBid);
 router.delete('/auction/:auctionid', requireJwtAuth, userCtrl.deleteAuction);
 router.delete('/bid/:bidid', requireJwtAuth, userCtrl.deleteBid);
 router.put('/auction/:auctionid', requireJwtAuth, userCtrl.updateAuction);

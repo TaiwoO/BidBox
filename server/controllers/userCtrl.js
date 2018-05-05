@@ -38,7 +38,6 @@ function getBids(req, res) {
 function addAuction(req, res) {
     const user = req.user; // From successful jwt passport validation
 
-    console.log(user.auctions)
     const bookName = req.body.name;
     const bookVersion = req.body.version
     const bookCondiction = req.body.condition;
