@@ -14,10 +14,10 @@ const userSchema = new Schema({
         type: String,
         unique: true,
     },
-    books: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Book'
-    }],
+    // books: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Book'
+    // }],
     auctions: [{
         type: Schema.Types.ObjectId,
         ref: 'Auction'

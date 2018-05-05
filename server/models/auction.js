@@ -17,7 +17,11 @@ const auctionSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Bid'
     }],
-    startDate: Date || Date.now,
+    askingPrice: Number,
+    startDate: {
+        type: Date,
+        default: Date.now
+    },
     endDate: Date
 });
 
