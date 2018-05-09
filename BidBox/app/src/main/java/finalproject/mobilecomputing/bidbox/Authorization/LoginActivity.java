@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,8 +20,8 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-import finalproject.mobilecomputing.bidbox.HomeActivity;
 import finalproject.mobilecomputing.bidbox.R;
+import finalproject.mobilecomputing.bidbox.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,12 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         textField_Email = findViewById(R.id.text_loginEmail);
         textField_Password = findViewById(R.id.text_loginPassword);
 
-        ActionBar actionBar = getActionBar();
-        actionBar.setIcon(R.drawable.ic_action_logobidbox3);
-
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="https://8426ed93.ngrok.io/auth/login";
+        final String url ="http://83acedcb.ngrok.io/auth/login";
 
         // This listener sends an HTTP Requester when clicking the "Login" button.
         login_Button.setOnClickListener(new View.OnClickListener() {
