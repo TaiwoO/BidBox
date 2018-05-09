@@ -3,10 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimary">@android:color/background_dark</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <!--<item name="android:icon">@drawable/ic_action_logobidbox3</item>-->
     </style>
-
 </resources>

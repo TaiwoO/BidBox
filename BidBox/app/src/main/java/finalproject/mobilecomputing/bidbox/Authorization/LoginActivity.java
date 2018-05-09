@@ -1,5 +1,6 @@
 package finalproject.mobilecomputing.bidbox.Authorization;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         goToRegister_Button = findViewById(R.id.button_goToRegister);
         textField_Email = findViewById(R.id.text_loginEmail);
         textField_Password = findViewById(R.id.text_loginPassword);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setIcon(R.drawable.ic_action_logobidbox3);
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
