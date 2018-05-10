@@ -3,6 +3,7 @@ package finalproject.mobilecomputing.bidbox.Authorization;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,9 @@ import finalproject.mobilecomputing.bidbox.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String PREFERENCES = "";
+
+    private SharedPreferences sharedPreferences;
     private Button login_Button, goToRegister_Button;
     private EditText textField_Email, textField_Password;
 
@@ -37,10 +41,11 @@ public class LoginActivity extends AppCompatActivity {
         goToRegister_Button = findViewById(R.id.button_goToRegister);
         textField_Email = findViewById(R.id.text_loginEmail);
         textField_Password = findViewById(R.id.text_loginPassword);
+        sharedPreferences = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://83acedcb.ngrok.io/auth/login";
+        final String url ="http://c70a7cd7.ngrok.io/auth/login";
 
         // This listener sends an HTTP Requester when clicking the "Login" button.
         login_Button.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +101,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void gotoHomeActivity() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        // Store JSON web token in shared preferences here.
+        editor.putString()
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
