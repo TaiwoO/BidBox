@@ -22,7 +22,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Auction'
     }],
-
+    bids: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Bid'
+    }],
     password: {
         type: String,
         required: true
@@ -68,7 +71,8 @@ userSchema.statics.getPublicInfo = function (user) { // static method
         name: user.name,
         email: user.email,
         books: user.books,
-        auctions: user.auctions
+        auctions: user.auctions,
+        bids: user.bids
     };
 }
 
