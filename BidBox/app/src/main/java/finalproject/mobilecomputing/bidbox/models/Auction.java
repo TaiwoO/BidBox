@@ -9,24 +9,33 @@ import java.util.List;
 
 public class Auction {
 
+    private String id;
     private Book book;
     private List<Bid> bids;
     private Double askingPrice;
-    private Date startDate;
-    private Date endDate;
-    private String auctionerId;
+    private String startDate;
+    private String endDate;
+    private String auctioneerId;
 
     public Auction() {
 
     }
 
-    public Auction(Book book, List<Bid> bids, Double askingPrice, Date startDate, Date endDate, String auctionerId) {
+    public Auction(Book book, List<Bid> bids, Double askingPrice, String startDate, String endDate, String auctioneerId) {
         this.book = book;
         this.bids = bids;
         this.askingPrice = askingPrice;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.auctionerId = auctionerId;
+        this.auctioneerId = auctioneerId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Book getBook() {
@@ -53,27 +62,40 @@ public class Auction {
         this.askingPrice = askingPrice;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public String getAuctionerId() {
-        return auctionerId;
+    public String getAuctioneerId() {
+        return auctioneerId;
     }
 
-    public void setAuctionerId(String auctionerId) {
-        this.auctionerId = auctionerId;
+    public void setAuctioneerId(String auctioneerId) {
+        this.auctioneerId = auctioneerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Auction{" +
+                "id='" + id + '\'' +
+                ", book=" + book +
+                ", bids=" + bids +
+                ", askingPrice=" + askingPrice +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", auctioneerId='" + auctioneerId + '\'' +
+                '}';
     }
 }

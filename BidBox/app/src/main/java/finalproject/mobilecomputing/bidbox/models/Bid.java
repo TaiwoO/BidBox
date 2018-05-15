@@ -6,8 +6,9 @@ package finalproject.mobilecomputing.bidbox.models;
 
 public class Bid {
 
+    private String id; // The bid itself
     private Double price;
-    private String bidderId;
+    private String bidderId; // User that made the bid
 
     public Bid() {
 
@@ -16,6 +17,15 @@ public class Bid {
     public Bid(Double price, String bidderId) {
         this.price = price;
         this.bidderId = bidderId;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Double getPrice() {
@@ -37,7 +47,8 @@ public class Bid {
     @Override
     public String toString() {
         return "Bid{" +
-                "price=" + price +
+                "id='" + id + '\'' +
+                ", price=" + price +
                 ", bidderId='" + bidderId + '\'' +
                 '}';
     }

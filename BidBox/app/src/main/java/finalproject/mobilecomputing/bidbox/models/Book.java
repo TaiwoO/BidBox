@@ -87,4 +87,16 @@ public class Book {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", version='" + version + '\'' +
+                ", ownerID='" + ownerID + '\'' +
+                ", condition='" + condition + '\'' +
+                ", isbn='" + isbn + '\'' +
+                '}';
+    }
 }
