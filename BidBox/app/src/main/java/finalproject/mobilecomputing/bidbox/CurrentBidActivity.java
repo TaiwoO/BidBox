@@ -1,4 +1,4 @@
-package finalproject.mobilecomputing.bidbox.adapters;
+package finalproject.mobilecomputing.bidbox;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import finalproject.mobilecomputing.bidbox.R;
+import finalproject.mobilecomputing.bidbox.adapters.CurrentBidItemAdapter;
 import finalproject.mobilecomputing.bidbox.models.Book;
 
-public class CurrentBid extends AppCompatActivity {
+public class CurrentBidActivity extends AppCompatActivity {
 
 
     private List<Book> books;
