@@ -19,9 +19,8 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-import finalproject.mobilecomputing.bidbox.HomeActivity;
 import finalproject.mobilecomputing.bidbox.R;
-import finalproject.mobilecomputing.bidbox.adapters.CurrentBid;
+import finalproject.mobilecomputing.bidbox.CurrentBidActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -96,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void gotoHomeActivity() {
-        Intent intent = new Intent(this, CurrentBid.class);
+        Intent intent = new Intent(this, CurrentBidActivity.class);
         startActivity(intent);
     }
 }
