@@ -89,6 +89,8 @@ public class HomeActivity extends AppCompatActivity {
 
             case R.id.profile:
                 System.out.println("Fuck dude");
+                Intent intent = new Intent(this, CurrentBidActivity.class);
+                startActivity(intent);
                 return super.onOptionsItemSelected(item);
 
             default:
