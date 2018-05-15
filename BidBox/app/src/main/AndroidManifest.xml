@@ -3,6 +3,7 @@
     package="finalproject.mobilecomputing.bidbox">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -30,9 +31,19 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".HomeActivity" />
+
         <activity android:name=".CurrentBidActivity" />
         <activity android:name=".payment" />
         <activity android:name=".receipt"></activity>
+
+        <activity
+            android:name=".NewAuctionActivity"
+            android:parentActivityName=".HomeActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

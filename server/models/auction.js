@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const auctionSchema = new Schema({
 
-    bookid: {
+    book: {
         type: Schema.Types.ObjectId,
         ref: 'Book',
         required: true
     },
-    userid: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
