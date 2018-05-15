@@ -3,6 +3,7 @@
     package="finalproject.mobilecomputing.bidbox">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,11 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/unauthorizedTheme">
-
         <activity
             android:name=".Authorization.LoginActivity"
             android:windowSoftInputMode="stateHidden">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <!--SoftInputMode property prevents keyboard from popping up when loading the view-->
+        <!-- SoftInputMode property prevents keyboard from popping up when loading the view -->
         <activity
             android:name=".Authorization.RegistrationActivity"
             android:windowSoftInputMode="stateHidden">
@@ -31,13 +30,19 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+
         <activity
             android:name=".HomeActivity"
             android:theme="@style/authorizedTheme"
-            >
-
+            />
+        <activity
+            android:name=".NewAuctionActivity"
+            android:parentActivityName=".HomeActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
         </activity>
-
     </application>
 
 </manifest>

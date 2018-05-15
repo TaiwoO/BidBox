@@ -3,6 +3,7 @@
      <!-- This theme is for full screen (Login/Registration Activity) -->
     <style name="unauthorizedTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+<<<<<<< HEAD
 
         <item name="colorPrimary">@android:color/background_dark</item>
         <item name="colorPrimaryDark">#000000</item>
@@ -16,6 +17,11 @@
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!--<item name="android:icon">@drawable/ic_action_logobidbox3</item>-->
+=======
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/white</item>
+>>>>>>> 48da5e89abb6e82b31be07ebeb6592a954b50455
     </style>
 
 </resources>

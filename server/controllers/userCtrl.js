@@ -20,14 +20,35 @@ function _sendJsonResponse(res, status, content) {
  *  ============================================ REQUEST INTERCEPTIONS ====================================================
  */
 
-// TODO:
 function getUser(req, res) {
+    const userid = req.params.userid;
 
+    User.findById(userid)
+        .populate("bids")
+        .populate("auctions")
+        .then((user) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(user));
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        });
 };
 
-// TODO:
 function getAuctions(req, res) {
 
+    const userid = req.params.userid;
+
+    Auction.find({user: userid})
+        .populate("book")
+        .populate("bids")
+        .then((userAuctions)=> {
+            _sendJsonResponse(res, 200, userAuctions);
+        })
+        .catch((err)=> {
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+            console.log("Error: ", err.message);
+        }); 
 };
 
 // TODO:
@@ -62,8 +83,8 @@ function addAuction(req, res) {
     newBook.save()
         .then((newBook) => {
             let newAuction = new Auction({
-                userid: user._id,
-                bookid: newBook._id,
+                user: user._id,
+                book: newBook._id,
                 askingPrice: askingPrice,
                 endDate: endDate
             });
@@ -82,7 +103,7 @@ function addAuction(req, res) {
 
 function addBid(req, res) {
 
-    const user = req.user
+    const user = req.user;
     const auctionid = req.params.auctionid;
     const price = req.body.price;
 
@@ -99,9 +120,11 @@ function addBid(req, res) {
         }
         if (!auction) {
             _sendJsonResponse(res, 404, { message: "This auction does not exisit" })
+            return
         }
 
         const newBid = new Bid({
+            user: user.id,
             price: price
         });
 
@@ -115,7 +138,7 @@ function addBid(req, res) {
             .then((updates) => {
                 let updatedUser = updates[0];
                 let updatedAuction = updates[1];
-                _sendJsonResponse(res, 200, updatedUser)
+                _sendJsonResponse(res, 200, User.getPublicInfo(updatedUser))
             })
             .catch(err => {
                 console.log("Error: " + err.message);
