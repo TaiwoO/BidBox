@@ -51,6 +51,7 @@ public class BidItemAdapter extends ArrayAdapter<Book> implements View.OnClickLi
         switch (view.getId()) {
             case R.id.bid_item_bid_btn:
                 Intent intent = new Intent(mContext, BidActivity.class);
+                
                 mContext.startActivity(intent);
                 Log.d(TAG, "OKAYY");
                 Toast.makeText(mContext, "Should go to bid pg now", Toast.LENGTH_SHORT).show();
