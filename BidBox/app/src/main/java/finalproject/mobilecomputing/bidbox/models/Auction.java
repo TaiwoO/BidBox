@@ -1,0 +1,101 @@
+package finalproject.mobilecomputing.bidbox.models;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by Taiwo on 5/15/2018.
+ */
+
+public class Auction {
+
+    private String id;
+    private Book book;
+    private List<Bid> bids;
+    private Double askingPrice;
+    private String startDate;
+    private String endDate;
+    private String auctioneerId;
+
+    public Auction() {
+
+    }
+
+    public Auction(Book book, List<Bid> bids, Double askingPrice, String startDate, String endDate, String auctioneerId) {
+        this.book = book;
+        this.bids = bids;
+        this.askingPrice = askingPrice;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.auctioneerId = auctioneerId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+
+    public Double getAskingPrice() {
+        return askingPrice;
+    }
+
+    public void setAskingPrice(Double askingPrice) {
+        this.askingPrice = askingPrice;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getAuctioneerId() {
+        return auctioneerId;
+    }
+
+    public void setAuctioneerId(String auctioneerId) {
+        this.auctioneerId = auctioneerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Auction{" +
+                "id='" + id + '\'' +
+                ", book=" + book +
+                ", bids=" + bids +
+                ", askingPrice=" + askingPrice +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", auctioneerId='" + auctioneerId + '\'' +
+                '}';
+    }
+}
