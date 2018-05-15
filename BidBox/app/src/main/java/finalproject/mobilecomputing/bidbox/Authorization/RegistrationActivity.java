@@ -2,6 +2,7 @@ package finalproject.mobilecomputing.bidbox.Authorization;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,12 @@ public class RegistrationActivity extends AppCompatActivity {
         goToLogin_Button = findViewById(R.id.button_goToLogin);
         textField_registerEmail = findViewById(R.id.text_registerEmail);
         textField_registerPassword = findViewById(R.id.text_registerPassword);
+
+        Typeface customFont_regular = Typeface.createFromAsset(getAssets(),"fonts/AvenirNextLTPro-Regular.otf");
+        register_Button.setTypeface(customFont_regular);
+        goToLogin_Button.setTypeface(customFont_regular);
+        textField_registerEmail.setTypeface(customFont_regular);
+        textField_registerPassword.setTypeface(customFont_regular);
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);

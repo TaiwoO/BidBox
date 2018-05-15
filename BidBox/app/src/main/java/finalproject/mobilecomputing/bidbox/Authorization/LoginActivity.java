@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login_Button, goToRegister_Button;
     private EditText textField_Email, textField_Password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,12 @@ public class LoginActivity extends AppCompatActivity {
         textField_Email = findViewById(R.id.text_loginEmail);
         textField_Password = findViewById(R.id.text_loginPassword);
         sharedPreferences = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+
+        Typeface customFont_regular = Typeface.createFromAsset(getAssets(),"fonts/AvenirNextLTPro-Regular.otf");
+        login_Button.setTypeface(customFont_regular);
+        goToRegister_Button.setTypeface(customFont_regular);
+        textField_Email.setTypeface(customFont_regular);
+        textField_Password.setTypeface(customFont_regular);
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
