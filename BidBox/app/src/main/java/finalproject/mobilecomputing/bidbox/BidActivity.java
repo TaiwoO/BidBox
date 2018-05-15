@@ -23,7 +23,7 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
     private TextView bookName, isbnNUm, sellerInfo, sellerEmail;
     private static BidItemAdapter bidItemAdapter;
     private List<Book> books;
-    private Button bidBtn;
+    private Button bidBtn, purchaseBtn;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         sellerEmail = (TextView) findViewById(R.id.bid_item_sellerEmail);
         bidBtn = (Button) findViewById(R.id.bidding_addBid);
         bidBtn.setOnClickListener(this);
+        purchaseBtn = (Button) findViewById(R.id.bidding_purchaseNow);
+        purchaseBtn.setOnClickListener(this);
 
 
 
@@ -84,8 +86,12 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         switch(view.getId()){
             case R.id.bidding_addBid:
 
-                //code to mage buttons goes here
+                //code to add bid here
 
+                break;
+            case R.id.bidding_purchaseNow:
+
+                //code for purchase now goes here
                 break;
         }
     }
