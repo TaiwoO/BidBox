@@ -17,9 +17,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import finalproject.mobilecomputing.bidbox.BidActivity;
-import finalproject.mobilecomputing.bidbox.NewAuctionActivity;
 import finalproject.mobilecomputing.bidbox.R;
-import finalproject.mobilecomputing.bidbox.models.Auction;
 import finalproject.mobilecomputing.bidbox.models.Book;
 
 public class BidItemAdapter extends ArrayAdapter<Book> implements View.OnClickListener {

@@ -19,8 +19,8 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-import finalproject.mobilecomputing.bidbox.HomeActivity;
 import finalproject.mobilecomputing.bidbox.R;
+import finalproject.mobilecomputing.bidbox.CurrentBidActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="https://8426ed93.ngrok.io/auth/login";
+        final String url ="https://e25688c1.ngrok.io/auth/login";
 
         // This listener sends an HTTP Requester when clicking the "Login" button.
         login_Button.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void gotoHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, CurrentBidActivity.class);
         startActivity(intent);
     }
 }
