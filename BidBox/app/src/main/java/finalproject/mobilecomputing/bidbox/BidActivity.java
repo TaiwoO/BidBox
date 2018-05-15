@@ -1,5 +1,6 @@
 package finalproject.mobilecomputing.bidbox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import finalproject.mobilecomputing.bidbox.adapters.BidItemAdapter;
@@ -18,12 +20,13 @@ import finalproject.mobilecomputing.bidbox.models.Book;
 
 
 
-public class BidActivity extends AppCompatActivity implements OnClickListener {
+public class BidActivity extends AppCompatActivity implements OnClickListener, Serializable {
 
     private TextView bookName, isbnNUm, sellerInfo, sellerEmail;
     private static BidItemAdapter bidItemAdapter;
     private List<Book> books;
     private Button bidBtn, purchaseBtn;
+    private Book passBook;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,29 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
 
 
 
-        //linking with book and adapter - code goes here
+        //getting Book object
+        Intent i = getIntent();
+        passBook=(Book)i.getSerializableExtra("book");
+       // bookName.setText(new String(passBook.getName() + passBook.getVersion()));
+        //setting object on bid page, based on data that is pass
+        //bookName.setText(passBook.getName());
+        //isbnNUm.setText(passBook.getIsbn());
+
+
+        //setting book
+//        this.id="000";
+//        this.name="TestBook";
+//        this.version="v9";
+//        this.ownerID="sss1";
+//        this.condition="New";
+//        this.isbn="000000";
+
+        //template for sending object to checkout
+//        Deneme dene = new Deneme(4,"Mustafa");
+//        Intent i = new Intent(this, Y.class);
+//        i.putExtra("sampleObject", dene);
+//        startActivity(i);
+
     }
 
     //getters and settings for views on bidding.xml
