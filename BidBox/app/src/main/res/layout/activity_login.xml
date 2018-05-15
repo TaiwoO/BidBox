@@ -3,7 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/wallpaper"
-
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -14,52 +13,61 @@
         android:paddingRight="24dp"
         android:paddingTop="56dp"
         android:scaleType="fitXY"
-
         >
-        <!-- Username Text Input -->
+
+        <ImageView
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/ic_action_logobidbox3"/>
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:fontFamily="casual"
+            android:fontFamily="Ava"
             android:text="BidBox"
             android:textAlignment="center"
-            android:textColor="#74c9ef"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textColor="#ffffff"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
 
-        <android.support.design.widget.TextInputLayout
+        <!-- Email Text Input -->
+        <EditText
+            android:id="@+id/text_loginEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/roundedbutton"
+            android:hint="Email"
+            android:ellipsize="start"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
 
-            <EditText
-                android:id="@+id/text_loginEmail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Email" />
-        </android.support.design.widget.TextInputLayout>
-
-        <!-- Password Text Input -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
+        <!--Password Text Input-->
             <EditText
                 android:id="@+id/text_loginPassword"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/roundedbutton"
                 android:hint="Password"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
+                android:inputType="textPassword"
+                android:ellipsize="start"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"/>
 
         <Button
             android:id="@+id/button_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/filled_roundedbutton"
+            android:textColor="@android:color/white"
             android:text="Login" />
 
         <Button
@@ -67,6 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@drawable/filled_roundedbutton"
+            android:textColor="@android:color/white"
             android:text="Register an Account" />
     </LinearLayout>
 
