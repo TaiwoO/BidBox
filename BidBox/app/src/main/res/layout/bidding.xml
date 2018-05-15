@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/background_gradient"
+
+    >
+
+
+
+    <TextView
+        android:id="@+id/bid_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Organic Chemistry 1 10th Edition"
+
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/bid_item_isbn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ISBN# 472854865 "
+
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/bid_item_sellerInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sold By Janice King "
+
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/bid_item_sellerEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="jking@umbc.edu "
+
+        android:textColor="@android:color/white" />
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="366dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/bid_item_img"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="35dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/book1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bidTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Time Remaining: "
+
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/bid_item_timeRemaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2:00:00"
+
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bidTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Current Bid: "
+
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/bid_item_currentBid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="$25"
+
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bidTextView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="InsertBid: "
+                    android:layout_marginTop="10dp"/>
+
+                <!--<TextView-->
+                <!--android:id="@+id/bid_item_insertBid"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="$25"-->
+                <!---->
+                <!--android:layout_marginTop="10dp"/>-->
+
+                <EditText
+                    android:id="@+id/bid_insertBidEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:hint="Bid Amount"
+                    android:inputType="number" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bidding_addBid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/roundedbutton"
+                android:text="Place Bid"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="75dp"/>
+
+            <!--android:layout_marginBottom="35dp"-->
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/bidding_purchaseNowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Buy now for: $85  "
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="10dp"/>
+
+
+        <Button
+            android:id="@+id/bidding_purchaseNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/roundedbutton"
+            android:text="Purchase"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="75dp"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</LinearLayout>
