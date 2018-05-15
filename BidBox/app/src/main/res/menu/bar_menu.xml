@@ -10,7 +10,13 @@
         app:actionViewClass="android.support.v7.widget.SearchView" />
 
     <item
-        android:id="@+id/action_nav"
-        android:title="action_nav"
+        android:id="@+id/profile"
+        android:title="My Profile"
         android:icon="@drawable/ic_action_baseline_menu_24px" />
+
+    <item
+        android:id="@+id/purchase_history"
+        android:title="Purchase History"
+        android:icon="@drawable/ic_action_baseline_menu_24px" />
+
 </menu>

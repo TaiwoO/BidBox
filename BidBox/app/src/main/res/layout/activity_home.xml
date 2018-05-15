@@ -25,10 +25,7 @@
             android:id="@+id/toolbar_title"
             />
 
-
-
     </android.support.v7.widget.Toolbar>
-
 
     <ListView
         android:id="@+id/bid_item_listview"

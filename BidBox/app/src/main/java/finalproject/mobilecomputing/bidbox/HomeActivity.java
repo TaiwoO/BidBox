@@ -39,7 +39,6 @@ public class HomeActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setLogo(R.drawable.ic_action_logobidbox3);
 
         bidItemListView = (ListView)findViewById(R.id.bid_item_listview);
         addAuctionBtn = (FloatingActionButton) findViewById(R.id.home_add_auction_fab);
@@ -86,6 +85,10 @@ public class HomeActivity extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.action_search:
                 System.out.println("Shit dude");
+                return super.onOptionsItemSelected(item);
+
+            case R.id.profile:
+                System.out.println("Fuck dude");
                 return super.onOptionsItemSelected(item);
 
             default:
