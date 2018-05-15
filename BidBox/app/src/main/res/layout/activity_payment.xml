@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".payment"
+    tools:layout_editor_absoluteY="81dp">
+
+    <Button
+        android:id="@+id/button_Paypal"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginBottom="46dp"
+        android:background="@drawable/rounded_payment"
+        android:ems="10"
+        android:gravity="start"
+        android:text="Paypal"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_price"
+        app:layout_constraintStart_toStartOf="@+id/button_campusCard"
+        app:layout_constraintTop_toBottomOf="@+id/button_campusCard" />
+
+    <Button
+        android:id="@+id/button_campusCard"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_payment"
+        android:ems="10"
+        android:gravity="start"
+        android:text="Campus card"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_Paypal"
+        app:layout_constraintStart_toStartOf="@+id/button_credit_debit"
+        app:layout_constraintTop_toBottomOf="@+id/button_credit_debit" />
+
+    <Button
+        android:id="@+id/button_credit_debit"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/rounded_payment"
+        android:ems="10"
+        android:gravity="start"
+        android:text="Credit/Debit"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_campusCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_paymentMethods" />
+
+    <TextView
+        android:id="@+id/text_paymentMethods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Payment Methods"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_credit_debit"
+        app:layout_constraintStart_toStartOf="@+id/button_credit_debit"
+        app:layout_constraintTop_toBottomOf="@+id/text_cardNumber" />
+
+    <TextView
+        android:id="@+id/text_payment"
+        android:layout_width="138dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="36dp"
+        android:text="Payment"
+        android:textColor="@android:color/white"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_savedCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/text_savedCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:text="Saved Card"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_cardNumber"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_payment" />
+
+    <EditText
+        android:id="@+id/text_cardNumber"
+        android:layout_width="298dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/rounded_payment"
+        android:ems="10"
+        android:inputType="number"
+        android:text="Visa XXXX XXXX XX28"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_paymentMethods"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_savedCard" />
+
+    <TextView
+        android:id="@+id/text_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="76dp"
+        android:layout_marginLeft="133dp"
+        android:layout_marginStart="133dp"
+        android:text="Total:"
+        android:textSize="22dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/text_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_price" />
+
+    <TextView
+        android:id="@+id/text_price"
+        android:layout_width="68dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="66dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:hint="price"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_total"
+        app:layout_constraintTop_toBottomOf="@+id/button_Paypal"
+        app:layout_constraintTop_toTopOf="@+id/button_pay"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+
+    <Button
+        android:id="@+id/button_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginLeft="219dp"
+        android:layout_marginRight="57dp"
+        android:layout_marginStart="219dp"
+        android:layout_marginTop="4dp"
+        android:text="Pay "
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_price" />
+
+</android.support.constraint.ConstraintLayout>
