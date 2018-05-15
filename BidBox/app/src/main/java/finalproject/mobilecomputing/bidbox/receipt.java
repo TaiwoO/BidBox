@@ -42,14 +42,14 @@ public class receipt extends AppCompatActivity {
         //To Do : OrderDetails
         //To Do : OrderNumber
 
-//        button_continue.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent goto_homepage = new Intent(getBaseContext(), HomeActivity.class);
-//                goto_homepage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//                startActivity(goto_homepage);
-//            }
-//        });
+        button_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goto_homepage = new Intent(getBaseContext(), HomeActivity.class);
+               goto_homepage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(goto_homepage);
+            }
+        });
 
 
 

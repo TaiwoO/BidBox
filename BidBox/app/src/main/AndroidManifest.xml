@@ -15,11 +15,7 @@
         <activity
             android:name=".Authorization.LoginActivity"
             android:windowSoftInputMode="stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- SoftInputMode property prevents keyboard from popping up when loading the view -->
@@ -33,7 +29,13 @@
         <activity android:name=".HomeActivity" />
 
         <activity android:name=".CurrentBidActivity" />
-        <activity android:name=".payment" />
+        <activity android:name=".payment" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".receipt"></activity>
 
         <activity
