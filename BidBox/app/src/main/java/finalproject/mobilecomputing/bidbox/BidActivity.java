@@ -29,7 +29,8 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bidding);
-
+        setTitle("Bid On this Book");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //get instance from layout
         bookName = (TextView) findViewById(R.id.bid_item_name);

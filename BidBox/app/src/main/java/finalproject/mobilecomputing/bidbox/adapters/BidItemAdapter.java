@@ -1,6 +1,7 @@
 package finalproject.mobilecomputing.bidbox.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import finalproject.mobilecomputing.bidbox.BidActivity;
+import finalproject.mobilecomputing.bidbox.NewAuctionActivity;
 import finalproject.mobilecomputing.bidbox.R;
 import finalproject.mobilecomputing.bidbox.models.Book;
 
@@ -47,6 +50,8 @@ public class BidItemAdapter extends ArrayAdapter<Book> implements View.OnClickLi
 
         switch (view.getId()) {
             case R.id.bid_item_bid_btn:
+                Intent intent = new Intent(mContext, BidActivity.class);
+                mContext.startActivity(intent);
                 Log.d(TAG, "OKAYY");
                 Toast.makeText(mContext, "Should go to bid pg now", Toast.LENGTH_SHORT).show();
                 break;
