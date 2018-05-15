@@ -15,6 +15,7 @@
         <activity
             android:name=".Authorization.LoginActivity"
             android:windowSoftInputMode="stateHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,11 +34,21 @@
         <activity android:name=".HomeActivity" />
 
         <activity android:name=".CurrentBidActivity" />
-        <activity android:name=".payment" />
+        <activity android:name=".payment" >
+
+        </activity>
         <activity android:name=".receipt"></activity>
 
         <activity
             android:name=".NewAuctionActivity"
+            android:parentActivityName=".HomeActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
+            android:name=".BidActivity"
             android:parentActivityName=".HomeActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data

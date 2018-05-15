@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
+    android:gravity="center"
+
+    android:orientation="vertical"
     tools:context=".receipt">
 
     <TextView
@@ -13,19 +15,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
+        android:baselineAligned="false"
         android:text="THANK YOU!"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="348dp"
-        android:layout_height="400dp"
+    <LinearLayout
+
+        android:layout_width="300dp"
+        android:layout_height="325dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/receipt_border"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_thankYou">
@@ -37,6 +42,7 @@
             android:layout_alignLeft="@+id/text_orderdetails"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/text_orderdetails"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="22dp"
             android:text="Order#"
             android:textAlignment="center"
@@ -47,9 +53,12 @@
 
         <TextView
             android:id="@+id/text_orderdetails"
-            android:layout_width="307dp"
-            android:layout_height="177dp"
+            android:layout_width="286dp"
+            android:layout_height="225dp"
+            android:layout_gravity="center_horizontal"
             android:layout_centerInParent="true"
+            android:paddingLeft="0dp"
+
             android:text="Order Details"
             android:textAlignment="center"
             android:textColor="@android:color/white"
@@ -57,47 +66,65 @@
             tools:layout_editor_absoluteX="70dp"
             tools:layout_editor_absoluteY="178dp" />
 
-        <TextView
-            android:id="@+id/text_receiptTotal"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginEnd="139dp"
-            android:layout_marginRight="139dp"
-            android:text="Total:"
-            android:textColor="@android:color/white"
-            android:textSize="18dp" />
+            android:orientation="horizontal"
+            android:layout_gravity="right"
+            >
 
-        <TextView
-            android:id="@+id/text_receiptPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/text_receiptTotal"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="68dp"
-            android:layout_marginRight="68dp"
-            android:text="price"
-            android:textColor="@android:color/white"
-            android:textSize="18dp" />
+            <TextView
+                android:id="@+id/text_receiptTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="139dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="0dp"
+
+                android:text="Total:"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/text_receiptPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/text_receiptTotal"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
 
 
-    </RelativeLayout>
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="0dp"
+                android:padding="0dp"
+                android:text="price"
+                android:textColor="@android:color/white"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
     <Button
         android:id="@+id/button_continue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="77dp"
-        android:layout_marginRight="77dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="0dp"
+        android:baselineAligned="false"
+
+
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="20dp" />
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
