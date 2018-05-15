@@ -1,6 +1,7 @@
 const Book = require('../models/book');
 const Auction = require('../models/auction');
 const User = require('../models/user');
+const Bid = require('../models/bid');
 
 /**
  *  ============================================ HELPER FUNCTIONS ====================================================
@@ -34,7 +35,6 @@ function getBids(req, res) {
 
 };
 
-// TODO:
 function addAuction(req, res) {
     const user = req.user; // From successful jwt passport validation
 
@@ -62,8 +62,8 @@ function addAuction(req, res) {
     newBook.save()
         .then((newBook) => {
             let newAuction = new Auction({
-                bookid: newBook._id,
                 userid: user._id,
+                bookid: newBook._id,
                 askingPrice: askingPrice,
                 endDate: endDate
             });
@@ -80,9 +80,49 @@ function addAuction(req, res) {
         });
 };
 
-// TODO:
 function addBid(req, res) {
 
+    const user = req.user
+    const auctionid = req.params.auctionid;
+    const price = req.body.price;
+
+    if (!price) {
+        _sendJsonResponse(res, 404, { message: "all fields are required" })
+        return
+    }
+
+    Auction.findById(auctionid, (err, auction) => {
+
+        if (err) {
+            _sendJsonResponse(res, 404, { message: "An error occured while looking for the auciton" })
+            return
+        }
+        if (!auction) {
+            _sendJsonResponse(res, 404, { message: "This auction does not exisit" })
+        }
+
+        const newBid = new Bid({
+            price: price
+        });
+
+        newBid.save()
+            .then((newBid) => {
+                user.bids.push(newBid);
+                auction.bids.push(newBid);
+
+                return Promise.all([user.save(), auction.save()])
+            })
+            .then((updates) => {
+                let updatedUser = updates[0];
+                let updatedAuction = updates[1];
+                _sendJsonResponse(res, 200, updatedUser)
+            })
+            .catch(err => {
+                console.log("Error: " + err.message);
+
+                _sendJsonResponse(res, 404, { message: "Error adding new bid" });
+            });
+    });
 };
 
 // TODO:

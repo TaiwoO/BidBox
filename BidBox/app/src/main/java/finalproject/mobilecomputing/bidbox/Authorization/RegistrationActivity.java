@@ -39,7 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://c70a7cd7.ngrok.io/auth/register";
+        final String url ="http://830fe38a.ngrok.io/auth/register";
 
         register_Button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://c70a7cd7.ngrok.io/auth/login";
+        final String url ="http://830fe38a.ngrok.io/auth/login";
 
         // This listener sends an HTTP Requester when clicking the "Login" button.
         login_Button.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
     private void gotoHomeActivity() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         // Store JSON web token in shared preferences here.
-        editor.putString()
+//        editor.putString();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
