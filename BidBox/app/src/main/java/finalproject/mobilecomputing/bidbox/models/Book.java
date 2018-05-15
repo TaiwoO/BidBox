@@ -1,11 +1,13 @@
 package finalproject.mobilecomputing.bidbox.models;
 
+import java.io.Serializable;
+
 /**
  * Created by z on 5/3/18.
  */
 
 //book class that makes book objects base on data from the server
-public class Book {
+public class Book implements Serializable {
 
     private String id, name, version, ownerID, condition, isbn;
 

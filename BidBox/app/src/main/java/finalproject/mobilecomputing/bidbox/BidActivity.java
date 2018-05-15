@@ -3,6 +3,7 @@ package finalproject.mobilecomputing.bidbox;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import finalproject.mobilecomputing.bidbox.models.Book;
 
 
 
-public class BidActivity extends AppCompatActivity implements OnClickListener, Serializable {
+public class BidActivity extends AppCompatActivity implements OnClickListener {
 
     private TextView bookName, isbnNUm, sellerInfo, sellerEmail;
     private static BidItemAdapter bidItemAdapter;
@@ -50,10 +51,12 @@ public class BidActivity extends AppCompatActivity implements OnClickListener, S
         //getting Book object
         Intent i = getIntent();
         passBook=(Book)i.getSerializableExtra("book");
+        Log.d("BidAcvtivity", passBook.toString());
        // bookName.setText(new String(passBook.getName() + passBook.getVersion()));
         //setting object on bid page, based on data that is pass
-        //bookName.setText(passBook.getName());
-        //isbnNUm.setText(passBook.getIsbn());
+
+        bookName.setText(passBook.getName());
+        isbnNUm.setText(passBook.getIsbn());
 
 
         //setting book
