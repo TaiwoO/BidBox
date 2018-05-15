@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_first"
+        android:name="Test 1"
+        android:title="BIDDING"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"
+        />
+
+    <item
+        android:id="@+id/menu_middle"
+        android:name="Test 2"
+        android:title="YOUR BIDS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"/>
+
+    <item
+        android:id="@+id/menu_last"
+        android:name="Test 3"
+        android:title="CHECKOUT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"
+        />
+</menu>

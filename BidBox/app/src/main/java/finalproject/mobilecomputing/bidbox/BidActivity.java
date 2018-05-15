@@ -2,8 +2,12 @@ package finalproject.mobilecomputing.bidbox;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,6 +27,7 @@ import finalproject.mobilecomputing.bidbox.models.Book;
 
 public class BidActivity extends AppCompatActivity implements OnClickListener {
 
+    private ActionBar actionBar;
     private TextView bookName, isbnNUm, sellerInfo, sellerEmail;
     private static BidItemAdapter bidItemAdapter;
     private List<Book> books;
@@ -34,7 +39,14 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bidding);
         setTitle("Bid On this Book");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         //get instance from layout
         bookName = (TextView) findViewById(R.id.bid_item_name);
@@ -122,6 +134,29 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
 
                 //code for purchase now goes here
                 break;
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_search:
+                return super.onOptionsItemSelected(item);
+
+            case R.id.profile:
+                Intent intent = new Intent(this, CurrentBidActivity.class);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

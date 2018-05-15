@@ -6,8 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +28,7 @@ public class NewAuctionActivity extends AppCompatActivity {
     private EditText bookCondition;
     private ImageButton bookImageBtn;
     private Button submitBtn;
+    private ActionBar actionBar;
 
 
     @Override
@@ -31,7 +36,14 @@ public class NewAuctionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_auction);
         setTitle("Add New Auction");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         bookName = (EditText) findViewById(R.id.new_auction_book_name);
         bookIsbn = (EditText) findViewById(R.id.new_auction_book_isbn);
@@ -76,4 +88,28 @@ public class NewAuctionActivity extends AppCompatActivity {
                     .show();
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_search:
+                return super.onOptionsItemSelected(item);
+
+            case R.id.profile:
+                Intent intent = new Intent(this, CurrentBidActivity.class);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }

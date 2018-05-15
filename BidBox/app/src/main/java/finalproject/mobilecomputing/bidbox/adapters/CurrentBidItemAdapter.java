@@ -94,13 +94,14 @@ public class CurrentBidItemAdapter extends ArrayAdapter<Book> implements View.On
             viewHolder = (CurrentBidItemAdapter.ViewHolder) convertView.getTag();
         }
 
-        //viewHolder.bookName.setText(book.getName());
-        //viewHolder.bookIsbn.setText(book.getIsbn());
+        viewHolder.bookName.setText(book.getName());
+        viewHolder.bookIsbn.setText(book.getIsbn());
 
 
-        //viewHolder.timeRemaining.setText(); book.getTimeFormat();
-        //viewHolder.yourBid.setText(); book.getBid(userid?);
-        //viewHolder.currentBid.setText(); book.getCurrentBid();
+
+        viewHolder.timeRemaining.setText("1:57:39"); //book.getTimeFormat();
+        viewHolder.yourBid.setText("$25.50"); //book.getBid(userid?);
+        viewHolder.currentBid.setText("$25.50"); //book.getCurrentBid();
 
 
         //viewHolder.bidBtn.setOnClickListener(this);
