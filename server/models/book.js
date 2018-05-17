@@ -13,6 +13,7 @@ const bookSchema = new Schema({
     isbn: String,
     img: Buffer,
     imgUrl: String,
+    price: Number
 
 });
 

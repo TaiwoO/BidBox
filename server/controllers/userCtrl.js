@@ -39,21 +39,68 @@ function getAuctions(req, res) {
 
     const userid = req.params.userid;
 
-    Auction.find({user: userid})
+    Auction.find({ user: userid })
         .populate("book")
         .populate("bids")
-        .then((userAuctions)=> {
+        .then((userAuctions) => {
             _sendJsonResponse(res, 200, userAuctions);
         })
-        .catch((err)=> {
+        .catch((err) => {
             _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
             console.log("Error: ", err.message);
-        }); 
+        });
+};
+
+function getShoppingChart(req, res) {
+    //TODO: make this a protected GET request
+
+    const userId = req.params.userid;
+    User.findById(userId)
+        .populate('shoppingChart')
+        .then((user) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(user).shoppingChart);
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        })
 };
 
 // TODO:
 function getBids(req, res) {
+    const userId = req.params.userid;
 
+    User.findById(userId)
+        .populate('bids')
+        .then((user) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(user).bids);
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        })
+};
+
+function addToShoppingChart(req, res) {
+    const user = req.user;
+
+    const bookid = req.body.bookid;
+
+    if (!bookid) {
+        _sendJsonResponse(res, 404, { message: "all fields are required" })
+        return
+    }
+    // TODO: Make sure auction exiists first
+    //       Make sure that you can only add it once to shopping chart
+    user.shoppingChart.push(bookid);
+    user.save()
+        .then((updatedUser) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(updatedUser))
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        })
 };
 
 function addAuction(req, res) {
@@ -77,7 +124,8 @@ function addAuction(req, res) {
         name: bookName,
         version: bookVersion,
         condition: bookCondiction,
-        isbn: bookIsbn
+        isbn: bookIsbn,
+        price: askingPrice
     });
 
     newBook.save()
@@ -172,8 +220,10 @@ function updateBid(req, res) {
 
 module.exports = {
     getUser: getUser,
+    getShoppingChart: getShoppingChart,
     getAuctions: getAuctions,
     getBids: getBids,
+    addToShoppingChart: addToShoppingChart,
     addAuction: addAuction,
     addBid: addBid,
     deleteAuction: deleteAuction,

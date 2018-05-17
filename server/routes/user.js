@@ -13,6 +13,8 @@ router.get('/', function (req, res, next) {
 router.get('/:userid', userCtrl.getUser);
 router.get('/:userid/auction', userCtrl.getAuctions);
 router.get('/:userid/bid', userCtrl.getBids);
+router.get('/:userid/shoppingchart', userCtrl.getShoppingChart);
+router.post('/:userid/shoppingchart', requireJwtAuth, userCtrl.addToShoppingChart);
 router.post('/auction', requireJwtAuth, userCtrl.addAuction);
 router.post('/auction/:auctionid/bid', requireJwtAuth, userCtrl.addBid);
 router.delete('/auction/:auctionid', requireJwtAuth, userCtrl.deleteAuction);

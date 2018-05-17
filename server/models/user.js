@@ -26,6 +26,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Bid'
     }],
+    shoppingChart: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Book'
+    }],
     password: {
         type: String,
         required: true
@@ -72,7 +76,8 @@ userSchema.statics.getPublicInfo = function (user) { // static method
         email: user.email,
         books: user.books,
         auctions: user.auctions,
-        bids: user.bids
+        bids: user.bids,
+        shoppingChart: user.shoppingChart
     };
 }
 
