@@ -1,6 +1,6 @@
 <resources>
 
-     <!-- This theme is for full screen (Login/Registration Activity) -->
+    <!-- This theme is for full screen (Login/Registration Activity) -->
     <style name="unauthorizedTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/background_dark</item>
@@ -16,5 +16,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <!--<item name="android:icon">@drawable/ic_action_logobidbox3</item>-->
     </style>
+
+    <style name="unauthorizedTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="unauthorizedTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
