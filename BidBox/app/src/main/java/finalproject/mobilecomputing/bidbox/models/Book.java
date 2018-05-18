@@ -1,5 +1,7 @@
 package finalproject.mobilecomputing.bidbox.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -9,37 +11,22 @@ import java.io.Serializable;
 //book class that makes book objects base on data from the server
 public class Book implements Serializable {
 
-    private String id, name, version, ownerID, condition, isbn;
+    @SerializedName("_id")
+    private String id;
+    private String name, version, ownerID, condition, isbn;
+    private Double price;
 
-    //default Constructor
-    public Book(){
-        this.id="000";
-        this.name="TestBook";
-        this.version="v9";
-        this.ownerID="sss1";
-        this.condition="New";
-        this.isbn="000000";
+    public Book() {
+
     }
-
-    //initialize contructor
-    public Book(String...strArr){
-        this.id=strArr[0];
-        this.name=strArr[1];
-        this.version=strArr[2];
-        this.ownerID=strArr[3];
-        this.condition=strArr[4];
-        this.isbn=strArr[5];
-    }
-
-    //initialize contructor
-    public Book(String id, String name, String version, String ownderID, String condition, String isbn){
-        this.id=id;
-        this.name=name;
-        this.version=version;
-        this.ownerID=ownderID;
-        this.condition=condition;
-        this.isbn=isbn;
-
+    public Book(String id, String name, String version, String ownerID, String condition, String isbn, Double price) {
+        this.id = id;
+        this.name = name;
+        this.version = version;
+        this.ownerID = ownerID;
+        this.condition = condition;
+        this.isbn = isbn;
+        this.price = price;
     }
 
     public String getId() {
@@ -90,6 +77,14 @@ public class Book implements Serializable {
         this.isbn = isbn;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -99,6 +94,7 @@ public class Book implements Serializable {
                 ", ownerID='" + ownerID + '\'' +
                 ", condition='" + condition + '\'' +
                 ", isbn='" + isbn + '\'' +
+                ", price=" + price +
                 '}';
     }
 }

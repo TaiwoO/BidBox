@@ -4,13 +4,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
@@ -18,10 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import finalproject.mobilecomputing.bidbox.adapters.BidItemAdapter;
+import finalproject.mobilecomputing.bidbox.api.BidBox.BidBoxApiInterface;
+import finalproject.mobilecomputing.bidbox.models.Auction;
 import finalproject.mobilecomputing.bidbox.models.Book;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public static final String TAG = HomeActivity.class.getSimpleName();
     private ActionBar actionBar;
     private List<Book> books;
     private ListView bidItemListView;
@@ -40,7 +46,28 @@ public class HomeActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        bidItemListView = (ListView)findViewById(R.id.bid_item_listview);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://a0bb7b7e.ngrok.io/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        BidBoxApiInterface bidBoxService = retrofit.create(BidBoxApiInterface.class);
+        Call<List<Auction>> getAllAuctionsCall = bidBoxService.getAllAuctions();
+        getAllAuctionsCall.enqueue(new Callback<List<Auction>>() {
+            @Override
+            public void onResponse(Call<List<Auction>> call, Response<List<Auction>> response) {
+                int statusCode = response.code();
+                List<Auction> allAuctions = response.body();
+                Log.d(TAG, "@@@@: " + allAuctions.get(0).toString());
+            }
+
+            @Override
+            public void onFailure(Call<List<Auction>> call, Throwable t) {
+                Log.d(TAG, "@@@@ AN ERROR OCCURED: ");
+            }
+        });
+
+        bidItemListView = (ListView) findViewById(R.id.bid_item_listview);
         addAuctionBtn = (FloatingActionButton) findViewById(R.id.home_add_auction_fab);
         addAuctionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,13 +109,13 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.action_search:
-                System.out.println("Shit dude");
+                System.out.println("...");
                 return super.onOptionsItemSelected(item);
 
             case R.id.profile:
-                System.out.println("Fuck dude");
+                System.out.println("...");
                 Intent intent = new Intent(this, CurrentBidActivity.class);
                 startActivity(intent);
                 return super.onOptionsItemSelected(item);

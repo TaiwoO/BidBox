@@ -1,24 +1,27 @@
 package finalproject.mobilecomputing.bidbox.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Taiwo on 5/15/2018.
  */
 
 public class Bid {
 
-    private String id; // The bid itself
+    @SerializedName("_id")
+    private String id;
     private Double price;
-    private String bidderId; // User that made the bid
+    private String bidderUserId;
 
     public Bid() {
 
     }
 
-    public Bid(Double price, String bidderId) {
+    public Bid(String id, Double price, String bidderUserId) {
+        this.id = id;
         this.price = price;
-        this.bidderId = bidderId;
+        this.bidderUserId = bidderUserId;
     }
-
 
     public String getId() {
         return id;
@@ -36,12 +39,12 @@ public class Bid {
         this.price = price;
     }
 
-    public String getBidderId() {
-        return bidderId;
+    public String getBidderUserId() {
+        return bidderUserId;
     }
 
-    public void setBidderId(String bidderId) {
-        this.bidderId = bidderId;
+    public void setBidderUserId(String bidderUserId) {
+        this.bidderUserId = bidderUserId;
     }
 
     @Override
@@ -49,7 +52,7 @@ public class Bid {
         return "Bid{" +
                 "id='" + id + '\'' +
                 ", price=" + price +
-                ", bidderId='" + bidderId + '\'' +
+                ", bidderUserId='" + bidderUserId + '\'' +
                 '}';
     }
 }

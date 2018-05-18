@@ -28,7 +28,7 @@ public final class BidJsonWrapper {
 
             bid.setId(id);
             bid.setPrice(price);
-            bid.setBidderId(bidderId);
+            bid.setBidderUserId(bidderId);
 
             return bid;
         } catch (JSONException e) {

@@ -122,7 +122,7 @@ function addAuction(req, res) {
 
     const endDate = req.body.endDate;
 
-    if (!bookName || !bookCondiction || !bookIsbn || bookVersion || !askingPrice) {
+    if (!bookName || !bookCondiction || !bookIsbn || !bookVersion || !askingPrice) {
         _sendJsonResponse(res, 404, { message: "All fields are required" });
         return
     }
