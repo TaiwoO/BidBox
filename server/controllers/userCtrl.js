@@ -118,13 +118,21 @@ function addAuction(req, res) {
     const bookCondiction = req.body.condition;
     const bookIsbn = req.body.isbn;
     const askingPrice = req.body.askingPrice;
+    const file = req.file
     // const bookImg = req.??.bookImg // TODO: read in binary for book img
 
     const endDate = req.body.endDate;
 
+    
     if (!bookName || !bookCondiction || !bookIsbn || !bookVersion || !askingPrice) {
         _sendJsonResponse(res, 404, { message: "All fields are required" });
         return
+    }
+
+    if (file) {
+        console.log(">>>>>>>>>>>>", req.file.path)
+    }else {
+        console.log("NO file")
     }
 
     let newBook = new Book({

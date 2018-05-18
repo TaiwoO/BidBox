@@ -4,5 +4,7 @@ module.exports = {
     // Database connection information
     'DATABASE': 'mongodb://localhost/BidBox',
     // Setting port for server
-    'PORT': process.env.PORT || 3000
+    'PORT': process.env.PORT || 3000,
+    // path for images uploaded to the server
+    'UPLOAD_PATH': 'uploads'
 }

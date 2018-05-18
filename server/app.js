@@ -13,6 +13,7 @@ const auctionRouter = require('./routes/auction');
 const bidRouter = require('./routes/bid');
 const bookRouter = require('./routes/book');
 const userRouter = require('./routes/user');
+const imgRouter = require('./routes/image');
 
 
 const app = express();
@@ -34,6 +35,7 @@ app.use('/auction', auctionRouter);
 app.use('/bid', bidRouter);
 app.use('/book', bookRouter);
 app.use('/user', userRouter);
+app.use('/image', imgRouter);
 
 
 // catch 404 and forward to error handler
