@@ -141,6 +141,7 @@ function addAuction(req, res) {
 
     // Mimic the endpoint for getting an image
     if (file) {
+        console.log("YES!: ", file.size);
         const curAddr = req.get('host');
         newBook.imgUrl = curAddr + "/image/" + file.filename; 
     }

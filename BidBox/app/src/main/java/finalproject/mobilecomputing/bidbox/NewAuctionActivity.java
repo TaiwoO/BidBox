@@ -21,7 +21,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.io.File;
+
 import finalproject.mobilecomputing.bidbox.api.BidBox.BidBoxApiInterface;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,6 +45,7 @@ public class NewAuctionActivity extends AppCompatActivity {
     private ImageButton bookImageBtn;
     private Button submitBtn;
     private ActionBar actionBar;
+    private String bookImageFilePath;
 
 
     @Override
@@ -82,9 +88,22 @@ public class NewAuctionActivity extends AppCompatActivity {
 
     private void submitNewAuctionForm() {
 
-        // New the user Json Web Token in order to add a new auction.
+        // Need the user Json Web Token in order to add a new auction.
         SharedPreferences pref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String token = pref.getString("token", null);
+
+        // TODO: Validtation.
+
+        // Convert the book file into a Multipart request body
+        File bookImageFile = new File(bookImageFilePath);
+        RequestBody reqFile = RequestBody.create(MediaType.parse("multipart/form-data"), bookImageFile);
+        MultipartBody.Part bookImageBody = MultipartBody.Part.createFormData("image", bookImageFile.getName(), reqFile);
+
+        RequestBody name = RequestBody.create(MediaType.parse("text/plain"), bookName.getText().toString());
+        RequestBody isbn = RequestBody.create(MediaType.parse("text/plain"), bookIsbn.getText().toString());
+        RequestBody version = RequestBody.create(MediaType.parse("text/plain"), bookVersion.getText().toString());
+        RequestBody condition = RequestBody.create(MediaType.parse("text/plain"), bookCondition.getText().toString());
+        RequestBody askingPrice = RequestBody.create(MediaType.parse("text/plain"), bookAskingPrice.getText().toString());
 
         Log.d(TAG, token);
         Retrofit retrofit = new Retrofit.Builder()
@@ -94,12 +113,16 @@ public class NewAuctionActivity extends AppCompatActivity {
 
         BidBoxApiInterface bidBoxService = retrofit.create(BidBoxApiInterface.class);
         // TODO: check if fields are non-empty
-        Call<Void> addNewAuctionCall = bidBoxService.addNewAuction(bookName.getText().toString(),
-                bookIsbn.getText().toString(),
-                bookVersion.getText().toString(),
-                bookCondition.getText().toString(),
-                bookAskingPrice.getText().toString(),
-                token);
+
+        Call<Void> addNewAuctionCall = bidBoxService.addNewAuction(
+                bookImageBody,
+                name,
+                isbn,
+                version,
+                condition,
+                askingPrice,
+                token
+        );
 
         addNewAuctionCall.enqueue(new Callback<Void>() {
             @Override
@@ -112,12 +135,13 @@ public class NewAuctionActivity extends AppCompatActivity {
 
                 } else {
                     Toast.makeText(NewAuctionActivity.this, "Failed to add auction. Make sure you filled in all fields", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "@@@@ OPPS");
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.d(TAG, "@@@@ AN ERROR OCCURED: many unAuthorized ");
+                Log.d(TAG, "@@@@ AN ERROR OCCURED: mabey unAuthorized ");
             }
         });
     }
@@ -143,9 +167,9 @@ public class NewAuctionActivity extends AppCompatActivity {
                         FILE, null, null, null);
                 cursor.moveToFirst();
                 int columnIndex = cursor.getColumnIndex(FILE[0]);
-                String bookImageFileLocation = cursor.getString(columnIndex);
+                bookImageFilePath = cursor.getString(columnIndex);
                 cursor.close();
-                Bitmap bookImageBitmap = BitmapFactory.decodeFile(bookImageFileLocation);
+                Bitmap bookImageBitmap = BitmapFactory.decodeFile(bookImageFilePath);
                 bookImageBtn.setImageBitmap(bookImageBitmap);
             }
 
