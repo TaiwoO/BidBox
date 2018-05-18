@@ -20,7 +20,7 @@ public interface BidBoxApiInterface {
     @GET("auction/all")
     Call<List<Auction>> getAllAuctions();
 
-    @FormUrlEncoded
+//    @FormUrlEncoded
     @POST("user/auction")
     Call<Void> addNewAuction(@Field("name") String name,
                        @Field("isbn") String isbn,
