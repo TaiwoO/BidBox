@@ -10,11 +10,5 @@ Web server for the BidBox application
 2. Start the server with 'npm start'
 3. Start the mongoDB server by running 'mongod' on a seperate shell
 
-## Testing on phone
-1. Find your computer's ip addresss and enter the following into a browser: "COMPUTER IP GOES HERE":3000/test
-
-## Testing on computer
-1. Using a web browser, go to http://localhost:3000/test
-
 ## API Documentation
 * [Swagger doc](https://app.swaggerhub.com/apis/TaiwoO/BidBoxAPI/1.0.0-oas3#/)
