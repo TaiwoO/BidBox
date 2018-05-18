@@ -2,6 +2,7 @@ const Book = require('../models/book');
 const Auction = require('../models/auction');
 const User = require('../models/user');
 const Bid = require('../models/bid');
+const config_constant = require('../config/config-constants');
 
 /**
  *  ============================================ HELPER FUNCTIONS ====================================================
@@ -112,13 +113,14 @@ function addToShoppingChart(req, res) {
 
 function addAuction(req, res) {
     const user = req.user; // From successful jwt passport validation
+    const file = req.file; // From Multer
+
 
     const bookName = req.body.name;
     const bookVersion = req.body.version
     const bookCondiction = req.body.condition;
     const bookIsbn = req.body.isbn;
     const askingPrice = req.body.askingPrice;
-    const file = req.file
     // const bookImg = req.??.bookImg // TODO: read in binary for book img
 
     const endDate = req.body.endDate;
@@ -129,12 +131,6 @@ function addAuction(req, res) {
         return
     }
 
-    if (file) {
-        console.log(">>>>>>>>>>>>", req.file.path)
-    }else {
-        console.log("NO file")
-    }
-
     let newBook = new Book({
         name: bookName,
         version: bookVersion,
@@ -142,6 +138,12 @@ function addAuction(req, res) {
         isbn: bookIsbn,
         price: askingPrice
     });
+
+    // Mimic the endpoint for getting an image
+    if (file) {
+        const curAddr = req.get('host');
+        newBook.imgUrl = curAddr + "/image/" + file.filename; 
+    }
 
     newBook.save()
         .then((newBook) => {
