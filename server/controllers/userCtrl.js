@@ -25,7 +25,14 @@ function getUser(req, res) {
 
     User.findById(userid)
         .populate("bids")
-        .populate("auctions")
+        .populate({
+            path: 'auctions',
+            populate: { path: 'bids',}
+        })
+        .populate({
+            path: 'auctions',
+            populate: { path: 'book',}
+        })
         .then((user) => {
             _sendJsonResponse(res, 200, User.getPublicInfo(user));
         })
