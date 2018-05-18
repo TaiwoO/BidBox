@@ -17,12 +17,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.util.List;
-
 import finalproject.mobilecomputing.bidbox.BidActivity;
 import finalproject.mobilecomputing.bidbox.R;
 import finalproject.mobilecomputing.bidbox.models.Auction;
-import finalproject.mobilecomputing.bidbox.models.Book;
 
 public class AuctionItemAdapter extends ArrayAdapter<Auction> implements View.OnClickListener {
 
@@ -30,7 +27,7 @@ public class AuctionItemAdapter extends ArrayAdapter<Auction> implements View.On
     Context mContext;
 
     public AuctionItemAdapter(@NonNull Context context) {
-        super(context, R.layout.bid_item_row);
+        super(context, R.layout.auction_item_row);
 
         this.mContext = context;
     }
@@ -79,7 +76,7 @@ public class AuctionItemAdapter extends ArrayAdapter<Auction> implements View.On
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.bid_item_row, parent, false);
+            convertView = inflater.inflate(R.layout.auction_item_row, parent, false);
 
             viewHolder.bookName = (TextView) convertView.findViewById(R.id.bid_item_name);
             viewHolder.bookIsbn = (TextView) convertView.findViewById(R.id.bid_item_isbn);
