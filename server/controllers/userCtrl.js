@@ -143,7 +143,7 @@ function addAuction(req, res) {
     if (file) {
         console.log("YES!: ", file.size);
         const curAddr = req.get('host');
-        newBook.imgUrl = curAddr + "/image/" + file.filename; 
+        newBook.imgUrl = "https://" +curAddr + "/image/" + file.filename; 
     }
 
     newBook.save()
