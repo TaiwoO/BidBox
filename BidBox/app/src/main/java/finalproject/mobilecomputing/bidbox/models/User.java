@@ -2,13 +2,14 @@ package finalproject.mobilecomputing.bidbox.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Taiwo on 5/17/2018.
  */
 
-public class User {
+public class User implements Serializable{
 
     @SerializedName("_id")
     String id;

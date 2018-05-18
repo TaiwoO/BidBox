@@ -2,6 +2,7 @@ package finalproject.mobilecomputing.bidbox.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Created by Taiwo on 5/15/2018.
  */
 
-public class Auction {
+public class Auction implements Serializable {
 
     @SerializedName("_id")
     private String id;
@@ -22,6 +23,16 @@ public class Auction {
 
     public Auction() {
 
+    }
+
+    public Auction(String id, Book book, List<Bid> bids, Double askingPrice, String startDate, String endDate, String auctioneerUserId) {
+        this.id = id;
+        this.book = book;
+        this.bids = bids;
+        this.askingPrice = askingPrice;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.auctioneerUserId = auctioneerUserId;
     }
 
     public String getId() {

@@ -13,17 +13,19 @@ public class Book implements Serializable {
 
     @SerializedName("_id")
     private String id;
-    private String name, version, ownerID, condition, isbn;
+    private String name, version, ownerID, condition, isbn, imgUrl;
     private Double price;
 
     public Book() {
 
     }
-    public Book(String id, String name, String version, String ownerID, String condition, String isbn, Double price) {
+
+    public Book(String id, String name, String version, String ownerID, String condition, String isbn, String imgUrl, Double price) {
         this.id = id;
         this.name = name;
         this.version = version;
         this.ownerID = ownerID;
+        this.imgUrl = imgUrl;
         this.condition = condition;
         this.isbn = isbn;
         this.price = price;
@@ -77,6 +79,14 @@ public class Book implements Serializable {
         this.isbn = isbn;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     public Double getPrice() {
         return price;
     }
@@ -94,6 +104,7 @@ public class Book implements Serializable {
                 ", ownerID='" + ownerID + '\'' +
                 ", condition='" + condition + '\'' +
                 ", isbn='" + isbn + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
                 ", price=" + price +
                 '}';
     }
