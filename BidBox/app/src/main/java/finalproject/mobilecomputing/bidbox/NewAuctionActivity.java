@@ -88,6 +88,7 @@ public class NewAuctionActivity extends AppCompatActivity {
 
     private void submitNewAuctionForm() {
 
+        submitBtn.setEnabled(false);
         // Need the user Json Web Token in order to add a new auction.
         SharedPreferences pref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String token = pref.getString("token", null);
@@ -134,6 +135,7 @@ public class NewAuctionActivity extends AppCompatActivity {
                     gotoHomeActivity();
 
                 } else {
+                    submitBtn.setEnabled(true);
                     Toast.makeText(NewAuctionActivity.this, "Failed to add auction. Make sure you filled in all fields", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "@@@@ OPPS");
                 }

@@ -13,6 +13,7 @@ public class Bid implements Serializable{
     @SerializedName("_id")
     private String id;
     private Double price;
+    @SerializedName("user")
     private String bidderUserId;
 
     public Bid() {

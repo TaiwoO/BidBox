@@ -15,10 +15,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import finalproject.mobilecomputing.bidbox.adapters.BidItemAdapter;
+import finalproject.mobilecomputing.bidbox.adapters.AuctionItemAdapter;
 import finalproject.mobilecomputing.bidbox.api.BidBox.BidBoxApiInterface;
 import finalproject.mobilecomputing.bidbox.models.Auction;
-import finalproject.mobilecomputing.bidbox.models.Book;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,10 +28,10 @@ public class HomeActivity extends AppCompatActivity {
 
     public static final String TAG = HomeActivity.class.getSimpleName();
     private ActionBar actionBar;
-    private List<Book> books;
-    private ListView bidItemListView;
+    private List<Auction> auctions;
+    private ListView auctionItemListView;
     private FloatingActionButton addAuctionBtn;
-    private static BidItemAdapter bidItemAdapter;
+    private static AuctionItemAdapter auctionItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        bidItemListView = (ListView) findViewById(R.id.bid_item_listview);
+        auctionItemListView = (ListView) findViewById(R.id.bid_item_listview);
         addAuctionBtn = (FloatingActionButton) findViewById(R.id.home_add_auction_fab);
         addAuctionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +54,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        books = new ArrayList<>();
-        bidItemAdapter = new BidItemAdapter(this, books);
-        bidItemListView.setAdapter(bidItemAdapter);
+        auctions = new ArrayList<>();
+        auctionItemAdapter = new AuctionItemAdapter(this);
+        auctionItemListView.setAdapter(auctionItemAdapter);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getString(R.string.base_url))
@@ -70,11 +69,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Auction>> call, Response<List<Auction>> response) {
                 int statusCode = response.code();
-                List<Auction> allAuctions = response.body();
-                for (Auction auction: allAuctions) {
-                    books.add(auction.getBook());
-                }
-                bidItemAdapter.notifyDataSetChanged();
+                auctions = response.body();
+                auctionItemAdapter.addAll(auctions);
+                auctionItemAdapter.notifyDataSetChanged();
             }
 
             @Override

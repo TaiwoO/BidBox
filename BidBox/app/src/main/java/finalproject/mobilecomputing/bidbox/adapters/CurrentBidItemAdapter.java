@@ -19,7 +19,7 @@ import finalproject.mobilecomputing.bidbox.models.Book;
 
 /**
  * Created by Joe on 5/8/2018.
- * Based on the BidItemAdapter.java but for the current bid page
+ * Based on the AuctionItemAdapter.java but for the current bid page
  */
 
 public class CurrentBidItemAdapter extends ArrayAdapter<Book> implements View.OnClickListener{

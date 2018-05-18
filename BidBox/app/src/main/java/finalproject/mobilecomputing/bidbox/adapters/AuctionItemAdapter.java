@@ -14,22 +14,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import finalproject.mobilecomputing.bidbox.BidActivity;
 import finalproject.mobilecomputing.bidbox.R;
+import finalproject.mobilecomputing.bidbox.models.Auction;
 import finalproject.mobilecomputing.bidbox.models.Book;
 
-public class BidItemAdapter extends ArrayAdapter<Book> implements View.OnClickListener {
+public class AuctionItemAdapter extends ArrayAdapter<Auction> implements View.OnClickListener {
 
-    public static final String TAG = BidItemAdapter.class.getSimpleName();
-    private List<Book> mBooks;
+    public static final String TAG = AuctionItemAdapter.class.getSimpleName();
     Context mContext;
 
-    public BidItemAdapter(@NonNull Context context, @NonNull List<Book> books) {
-        super(context, R.layout.bid_item_row, books);
+    public AuctionItemAdapter(@NonNull Context context) {
+        super(context, R.layout.bid_item_row);
 
-        this.mBooks = books;
         this.mContext = context;
     }
 
@@ -45,18 +47,16 @@ public class BidItemAdapter extends ArrayAdapter<Book> implements View.OnClickLi
     @Override
     public void onClick(View view) {
         int position = (Integer) view.getTag();
-        Book book = getItem(position);
+        Auction auction = getItem(position);
 
         switch (view.getId()) {
             case R.id.bid_item_bid_btn:
                 Intent intent = new Intent(mContext, BidActivity.class);
 
-                intent.putExtra("book", book);
+                intent.putExtra("auction", auction);
 
-                
                 mContext.startActivity(intent);
                 Log.d(TAG, "OKAYY");
-                Toast.makeText(mContext, "Should go to bid pg now", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bid_item_addToChart_btn:
                 Toast.makeText(mContext, "Should add the item to the chart now", Toast.LENGTH_SHORT).show();
@@ -68,7 +68,9 @@ public class BidItemAdapter extends ArrayAdapter<Book> implements View.OnClickLi
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        Book book = getItem(position);
+        Auction auction = getItem(position);
+
+        Log.d(TAG, auction.toString());
 
         // Check if an existing view is being reused, otherwise inflate the view
         //
@@ -90,12 +92,19 @@ public class BidItemAdapter extends ArrayAdapter<Book> implements View.OnClickLi
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.bookName.setText(book.getName());
-        viewHolder.bookIsbn.setText(book.getIsbn());
+        viewHolder.bookName.setText(auction.getBook().getName());
+        viewHolder.bookIsbn.setText(auction.getBook().getIsbn());
         viewHolder.bidBtn.setOnClickListener(this);
         viewHolder.bidBtn.setTag(position);
         viewHolder.addToChartBtn.setOnClickListener(this);
         viewHolder.addToChartBtn.setTag(position);
+        Log.d(TAG, auction.toString());
+        Glide.with(mContext)
+                .load(auction.getBook().getImgUrl())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.no_image_available_placeholder)
+                        .fitCenter())
+                .into(viewHolder.bookImg);
 
         return convertView;
     }
