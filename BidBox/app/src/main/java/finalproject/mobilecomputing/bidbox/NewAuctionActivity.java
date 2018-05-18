@@ -1,6 +1,8 @@
 package finalproject.mobilecomputing.bidbox;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +20,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import finalproject.mobilecomputing.bidbox.api.BidBox.BidBoxApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewAuctionActivity extends AppCompatActivity {
 
@@ -26,6 +36,7 @@ public class NewAuctionActivity extends AppCompatActivity {
     private EditText bookIsbn;
     private EditText bookVersion;
     private EditText bookCondition;
+    private EditText bookAskingPrice;
     private ImageButton bookImageBtn;
     private Button submitBtn;
     private ActionBar actionBar;
@@ -49,6 +60,7 @@ public class NewAuctionActivity extends AppCompatActivity {
         bookIsbn = (EditText) findViewById(R.id.new_auction_book_isbn);
         bookVersion = (EditText) findViewById(R.id.new_auction_book_version);
         bookCondition = (EditText) findViewById(R.id.new_auction_book_condition);
+        bookAskingPrice = (EditText) findViewById(R.id.new_auction_book_askingPrice);
         bookImageBtn = (ImageButton) findViewById(R.id.new_auction_book_img_btn);
         submitBtn = (Button) findViewById(R.id.new_auction_submit_btn);
 
@@ -59,6 +71,60 @@ public class NewAuctionActivity extends AppCompatActivity {
                 startActivityForResult(intent, IMG_RESULT);
             }
         });
+
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitNewAuctionForm();
+            }
+        });
+    }
+
+    private void submitNewAuctionForm() {
+
+        // New the user Json Web Token in order to add a new auction.
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = pref.getString("token", null);
+
+        Log.d(TAG, token);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getString(R.string.base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        BidBoxApiInterface bidBoxService = retrofit.create(BidBoxApiInterface.class);
+        // TODO: check if fields are non-empty
+        Call<Void> addNewAuctionCall = bidBoxService.addNewAuction(bookName.getText().toString(),
+                bookIsbn.getText().toString(),
+                bookVersion.getText().toString(),
+                bookCondition.getText().toString(),
+                bookAskingPrice.getText().toString(),
+                token);
+
+        addNewAuctionCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                int statusCode = response.code();
+
+                if (statusCode == 200) {
+                    Toast.makeText(NewAuctionActivity.this, "Auction was added!", Toast.LENGTH_SHORT).show();
+                    gotoHomeActivity();
+
+                } else {
+                    Toast.makeText(NewAuctionActivity.this, "Failed to add auction. Make sure you filled in all fields", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d(TAG, "@@@@ AN ERROR OCCURED: many unAuthorized ");
+            }
+        });
+    }
+
+    private void gotoHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -97,7 +163,7 @@ public class NewAuctionActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.action_search:
                 return super.onOptionsItemSelected(item);
 

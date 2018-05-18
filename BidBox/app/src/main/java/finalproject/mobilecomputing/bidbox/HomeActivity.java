@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         bidItemListView.setAdapter(bidItemAdapter);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://a0bb7b7e.ngrok.io/")
+                .baseUrl(getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -75,7 +75,6 @@ public class HomeActivity extends AppCompatActivity {
                     books.add(auction.getBook());
                 }
                 bidItemAdapter.notifyDataSetChanged();
-//                Log.d(TAG, "@@@@: " + allAuctions.get(0).toString());
             }
 
             @Override
@@ -83,29 +82,6 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d(TAG, "@@@@ AN ERROR OCCURED: ");
             }
         });
-
-
-//        books = new ArrayList<>();
-//        Book sampleBook = new Book();
-//        sampleBook.setIsbn("11112222223333333");
-//        sampleBook.setName("Chemistry one");
-//        Book sampleBook2 = new Book();
-//        sampleBook2.setIsbn("11112222223333333");
-//        sampleBook2.setName("Chemistry two");
-//        books.add(sampleBook);
-//        books.add(sampleBook2);
-//        books.add(sampleBook);
-//        books.add(sampleBook2);
-//        books.add(sampleBook);
-//        books.add(sampleBook2);
-//        books.add(sampleBook);
-//        books.add(sampleBook2);
-//        books.add(sampleBook);
-//        books.add(sampleBook2);
-//
-//
-//        bidItemAdapter = new BidItemAdapter(this, books);
-//        bidItemListView.setAdapter(bidItemAdapter);
 
     }
 
