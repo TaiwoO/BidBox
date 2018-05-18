@@ -46,6 +46,19 @@ public class HomeActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        bidItemListView = (ListView) findViewById(R.id.bid_item_listview);
+        addAuctionBtn = (FloatingActionButton) findViewById(R.id.home_add_auction_fab);
+        addAuctionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoNewAuctionActivity();
+            }
+        });
+
+        books = new ArrayList<>();
+        bidItemAdapter = new BidItemAdapter(this, books);
+        bidItemListView.setAdapter(bidItemAdapter);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://a0bb7b7e.ngrok.io/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -58,7 +71,11 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<List<Auction>> call, Response<List<Auction>> response) {
                 int statusCode = response.code();
                 List<Auction> allAuctions = response.body();
-                Log.d(TAG, "@@@@: " + allAuctions.get(0).toString());
+                for (Auction auction: allAuctions) {
+                    books.add(auction.getBook());
+                }
+                bidItemAdapter.notifyDataSetChanged();
+//                Log.d(TAG, "@@@@: " + allAuctions.get(0).toString());
             }
 
             @Override
@@ -67,37 +84,28 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        bidItemListView = (ListView) findViewById(R.id.bid_item_listview);
-        addAuctionBtn = (FloatingActionButton) findViewById(R.id.home_add_auction_fab);
-        addAuctionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                gotoNewAuctionActivity();
-
-            }
-        });
-        books = new ArrayList<>();
-        Book sampleBook = new Book();
-        sampleBook.setIsbn("11112222223333333");
-        sampleBook.setName("Chemistry one");
-        Book sampleBook2 = new Book();
-        sampleBook2.setIsbn("11112222223333333");
-        sampleBook2.setName("Chemistry two");
-        books.add(sampleBook);
-        books.add(sampleBook2);
-        books.add(sampleBook);
-        books.add(sampleBook2);
-        books.add(sampleBook);
-        books.add(sampleBook2);
-        books.add(sampleBook);
-        books.add(sampleBook2);
-        books.add(sampleBook);
-        books.add(sampleBook2);
-
-
-        bidItemAdapter = new BidItemAdapter(this, books);
-        bidItemListView.setAdapter(bidItemAdapter);
+//        books = new ArrayList<>();
+//        Book sampleBook = new Book();
+//        sampleBook.setIsbn("11112222223333333");
+//        sampleBook.setName("Chemistry one");
+//        Book sampleBook2 = new Book();
+//        sampleBook2.setIsbn("11112222223333333");
+//        sampleBook2.setName("Chemistry two");
+//        books.add(sampleBook);
+//        books.add(sampleBook2);
+//        books.add(sampleBook);
+//        books.add(sampleBook2);
+//        books.add(sampleBook);
+//        books.add(sampleBook2);
+//        books.add(sampleBook);
+//        books.add(sampleBook2);
+//        books.add(sampleBook);
+//        books.add(sampleBook2);
+//
+//
+//        bidItemAdapter = new BidItemAdapter(this, books);
+//        bidItemListView.setAdapter(bidItemAdapter);
 
     }
 
