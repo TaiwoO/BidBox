@@ -2,6 +2,7 @@ package finalproject.mobilecomputing.bidbox.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -19,7 +20,15 @@ import com.bumptech.glide.request.RequestOptions;
 
 import finalproject.mobilecomputing.bidbox.BidActivity;
 import finalproject.mobilecomputing.bidbox.R;
+import finalproject.mobilecomputing.bidbox.api.BidBox.BidBoxApiInterface;
 import finalproject.mobilecomputing.bidbox.models.Auction;
+import finalproject.mobilecomputing.bidbox.models.Book;
+import finalproject.mobilecomputing.bidbox.models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AuctionItemAdapter extends ArrayAdapter<Auction> implements View.OnClickListener {
 
@@ -51,14 +60,44 @@ public class AuctionItemAdapter extends ArrayAdapter<Auction> implements View.On
                 Intent intent = new Intent(mContext, BidActivity.class);
 
                 intent.putExtra("auction", auction);
-
                 mContext.startActivity(intent);
                 Log.d(TAG, "OKAYY");
                 break;
             case R.id.bid_item_addToChart_btn:
-                Toast.makeText(mContext, "Should add the item to the chart now", Toast.LENGTH_SHORT).show();
+                addToChart(auction.getBook());
                 break;
         }
+    }
+
+    private void addToChart(Book book) {
+        SharedPreferences pref = mContext.getSharedPreferences(mContext.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = pref.getString("token", null);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(mContext.getString(R.string.base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        BidBoxApiInterface bidBoxService = retrofit.create(BidBoxApiInterface.class);
+        Call<Void> addToChartCall = bidBoxService.addToShoppingChart(book.getId(), token);
+        addToChartCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                int statusCode = response.code();
+
+                if (statusCode == 200) {
+                    Toast.makeText(mContext, "Added  item to shopping chart", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, "Failed to add to chart", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
     }
 
     @NonNull

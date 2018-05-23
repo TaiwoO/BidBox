@@ -53,6 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
         final RequestQueue queue = Volley.newRequestQueue(this);
         final String url = getString(R.string.base_url) + "auth/register";
 
+
         register_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

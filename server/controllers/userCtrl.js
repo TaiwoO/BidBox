@@ -21,18 +21,42 @@ function _sendJsonResponse(res, status, content) {
  *  ============================================ REQUEST INTERCEPTIONS ====================================================
  */
 
+// Gets information the the user passed through jwt aucthentication
 function getUser(req, res) {
+    const user = req.user;
+    
+    User.findById(user._id)
+        .populate("bids")
+        .populate({
+            path: 'auctions',
+            populate: { path: 'bids', }
+        })
+        .populate({
+            path: 'auctions',
+            populate: { path: 'book', }
+        })
+        .then((user) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(user));
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        });
+}
+
+
+function getUserById(req, res) {
     const userid = req.params.userid;
 
     User.findById(userid)
         .populate("bids")
         .populate({
             path: 'auctions',
-            populate: { path: 'bids',}
+            populate: { path: 'bids', }
         })
         .populate({
             path: 'auctions',
-            populate: { path: 'book',}
+            populate: { path: 'book', }
         })
         .then((user) => {
             _sendJsonResponse(res, 200, User.getPublicInfo(user));
@@ -125,7 +149,7 @@ function addAuction(req, res) {
 
     const endDate = req.body.endDate;
 
-    
+
     if (!bookName || !bookCondiction || !bookIsbn || !bookVersion || !askingPrice) {
         _sendJsonResponse(res, 404, { message: "All fields are required" });
         return
@@ -143,7 +167,7 @@ function addAuction(req, res) {
     if (file) {
         console.log("YES!: ", file.size);
         const curAddr = req.get('host');
-        newBook.imgUrl = "https://" +curAddr + "/image/" + file.filename; 
+        newBook.imgUrl = "https://" + curAddr + "/image/" + file.filename;
     }
 
     newBook.save()
@@ -238,6 +262,7 @@ function updateBid(req, res) {
 
 module.exports = {
     getUser: getUser,
+    getUserById: getUserById,
     getShoppingChart: getShoppingChart,
     getAuctions: getAuctions,
     getBids: getBids,
