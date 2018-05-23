@@ -57,7 +57,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://3fa5d485.ngrok.io/auth/login";
+//        final String url = "http://bfe0823c.ngrok.io/auth/login";
+        final String url = getString(R.string.base_url) + "auth/login";
+//        System.out.println("URL IS@@@@@: " + url);
 
         // This listener sends an HTTP Requester when clicking the "Login" button.
         login_Button.setOnClickListener(new View.OnClickListener() {
