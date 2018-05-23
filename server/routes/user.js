@@ -8,11 +8,9 @@ const config = require('../config/config-constants');
 const requireJwtAuth = passport.authenticate('jwt', { session: false });
 const upload = multer({dest: config.UPLOAD_PATH})
 
-router.get('/', function (req, res, next) {
-  res.send("welcome to the user's route");
-});
+router.get('/', requireJwtAuth, userCtrl.getUser);
 
-router.get('/:userid', userCtrl.getUser);
+router.get('/:userid', userCtrl.getUserById);
 router.get('/:userid/auction', userCtrl.getAuctions);
 router.get('/:userid/bid', userCtrl.getBids);
 router.get('/:userid/shoppingchart', userCtrl.getShoppingChart);
