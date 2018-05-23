@@ -14,7 +14,7 @@ router.get('/:userid', userCtrl.getUserById);
 router.get('/:userid/auction', userCtrl.getAuctions);
 router.get('/:userid/bid', userCtrl.getBids);
 router.get('/:userid/shoppingchart', userCtrl.getShoppingChart);
-router.post('/:userid/shoppingchart', requireJwtAuth, userCtrl.addToShoppingChart);
+router.post('/shoppingchart', requireJwtAuth, userCtrl.addToShoppingChart);
 router.post('/auction', requireJwtAuth, upload.single('image'), userCtrl.addAuction);
 router.post('/auction/:auctionid/bid', requireJwtAuth, userCtrl.addBid);
 router.delete('/auction/:auctionid', requireJwtAuth, userCtrl.deleteAuction);
