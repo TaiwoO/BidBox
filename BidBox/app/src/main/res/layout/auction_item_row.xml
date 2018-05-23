@@ -8,8 +8,9 @@
 
     <TextView
         android:id="@+id/bid_item_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Organic Chemistry 1 10th Edition"
         android:textAlignment="center"
         android:textColor="@android:color/white"
@@ -17,16 +18,18 @@
 
     <TextView
         android:id="@+id/bid_item_isbn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="ISBN# 472854865 "
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
     <ImageView
         android:id="@+id/bid_item_img"
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="250dp"
+        android:layout_gravity="center"
         android:layout_marginBottom="35dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/book1" />

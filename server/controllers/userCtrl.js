@@ -2,6 +2,7 @@ const Book = require('../models/book');
 const Auction = require('../models/auction');
 const User = require('../models/user');
 const Bid = require('../models/bid');
+const config_constant = require('../config/config-constants');
 
 /**
  *  ============================================ HELPER FUNCTIONS ====================================================
@@ -20,12 +21,43 @@ function _sendJsonResponse(res, status, content) {
  *  ============================================ REQUEST INTERCEPTIONS ====================================================
  */
 
+// Gets information the the user passed through jwt aucthentication
 function getUser(req, res) {
+    const user = req.user;
+    
+    User.findById(user._id)
+        .populate("bids")
+        .populate({
+            path: 'auctions',
+            populate: { path: 'bids', }
+        })
+        .populate({
+            path: 'auctions',
+            populate: { path: 'book', }
+        })
+        .then((user) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(user));
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        });
+}
+
+
+function getUserById(req, res) {
     const userid = req.params.userid;
 
     User.findById(userid)
         .populate("bids")
-        .populate("auctions")
+        .populate({
+            path: 'auctions',
+            populate: { path: 'bids', }
+        })
+        .populate({
+            path: 'auctions',
+            populate: { path: 'book', }
+        })
         .then((user) => {
             _sendJsonResponse(res, 200, User.getPublicInfo(user));
         })
@@ -39,25 +71,74 @@ function getAuctions(req, res) {
 
     const userid = req.params.userid;
 
-    Auction.find({user: userid})
+    Auction.find({ user: userid })
         .populate("book")
         .populate("bids")
-        .then((userAuctions)=> {
+        .then((userAuctions) => {
             _sendJsonResponse(res, 200, userAuctions);
         })
-        .catch((err)=> {
+        .catch((err) => {
             _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
             console.log("Error: ", err.message);
-        }); 
+        });
+};
+
+function getShoppingChart(req, res) {
+    //TODO: make this a protected GET request
+
+    const userId = req.params.userid;
+    User.findById(userId)
+        .populate('shoppingChart')
+        .then((user) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(user).shoppingChart);
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        })
 };
 
 // TODO:
 function getBids(req, res) {
+    const userId = req.params.userid;
 
+    User.findById(userId)
+        .populate('bids')
+        .then((user) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(user).bids);
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        })
+};
+
+function addToShoppingChart(req, res) {
+    const user = req.user;
+
+    const bookid = req.body.bookid;
+
+    if (!bookid) {
+        _sendJsonResponse(res, 404, { message: "all fields are required" })
+        return
+    }
+    // TODO: Make sure auction exiists first
+    //       Make sure that you can only add it once to shopping chart
+    user.shoppingChart.push(bookid);
+    user.save()
+        .then((updatedUser) => {
+            _sendJsonResponse(res, 200, User.getPublicInfo(updatedUser))
+        })
+        .catch((err) => {
+            console.log("Error: " + err.message);
+            _sendJsonResponse(res, 404, { "message": "There was an error sorry" });
+        })
 };
 
 function addAuction(req, res) {
     const user = req.user; // From successful jwt passport validation
+    const file = req.file; // From Multer
+
 
     const bookName = req.body.name;
     const bookVersion = req.body.version
@@ -68,7 +149,8 @@ function addAuction(req, res) {
 
     const endDate = req.body.endDate;
 
-    if (!bookName || !bookCondiction || !bookIsbn || bookVersion || !askingPrice) {
+
+    if (!bookName || !bookCondiction || !bookIsbn || !bookVersion || !askingPrice) {
         _sendJsonResponse(res, 404, { message: "All fields are required" });
         return
     }
@@ -77,8 +159,16 @@ function addAuction(req, res) {
         name: bookName,
         version: bookVersion,
         condition: bookCondiction,
-        isbn: bookIsbn
+        isbn: bookIsbn,
+        price: askingPrice
     });
+
+    // Mimic the endpoint for getting an image
+    if (file) {
+        console.log("YES!: ", file.size);
+        const curAddr = req.get('host');
+        newBook.imgUrl = "https://" + curAddr + "/image/" + file.filename;
+    }
 
     newBook.save()
         .then((newBook) => {
@@ -172,8 +262,11 @@ function updateBid(req, res) {
 
 module.exports = {
     getUser: getUser,
+    getUserById: getUserById,
+    getShoppingChart: getShoppingChart,
     getAuctions: getAuctions,
     getBids: getBids,
+    addToShoppingChart: addToShoppingChart,
     addAuction: addAuction,
     addBid: addBid,
     deleteAuction: deleteAuction,

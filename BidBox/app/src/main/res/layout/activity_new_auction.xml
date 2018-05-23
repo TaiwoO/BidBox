@@ -28,123 +28,152 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:background="@drawable/roundedbutton"
-            android:paddingTop="5dp"
-            android:textColorHint="@android:color/white">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
-            <EditText
-                android:id="@+id/new_auction_book_name"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:ellipsize="end"
-                android:hint="BookName"
-                android:inputType="text"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/roundedbutton"
+                android:paddingTop="5dp"
+                android:textColorHint="@android:color/white">
+
+                <EditText
+                    android:id="@+id/new_auction_book_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:ellipsize="end"
+                    android:hint="BookName"
+                    android:inputType="text"
+                    android:textColor="@android:color/white" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/roundedbutton"
+                android:paddingTop="5dp"
+                android:textColorHint="@android:color/white">
+
+                <EditText
+                    android:id="@+id/new_auction_book_isbn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:ellipsize="end"
+                    android:hint="ISBN Number"
+                    android:inputType="number"
+                    android:maxLines="1"
+
+                    android:textColor="@android:color/white" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/roundedbutton"
+                android:paddingTop="5dp"
+                android:textColorHint="@android:color/white">
+
+                <EditText
+                    android:id="@+id/new_auction_book_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:ellipsize="end"
+                    android:hint="Version"
+                    android:inputType="text"
+                    android:maxLines="1"
+
+                    android:textColor="@android:color/white" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundedbutton"
+                android:paddingTop="5dp"
+                android:layout_marginBottom="7dp"
+                android:textColorHint="@android:color/white">
+
+                <EditText
+                    android:id="@+id/new_auction_book_condition"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:ellipsize="end"
+                    android:hint="Condition"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@android:color/white" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/roundedbutton"
+                android:paddingTop="5dp"
+                android:textColorHint="@android:color/white">
+
+                <EditText
+                    android:id="@+id/new_auction_book_askingPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:ellipsize="end"
+                    android:hint="Asking Price"
+                    android:inputType="number"
+                    android:maxLines="1"
+
+                    android:textColor="@android:color/white" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/new_auction_book_img_btn"
+                android:layout_width="145dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:layout_marginBottom="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_image" />
+
+            <Button
+                android:id="@+id/new_auction_submit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/roundedbutton_submit"
+                android:text="SUBMIT AUCTION"
                 android:textColor="@android:color/white" />
 
-        </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:background="@drawable/roundedbutton"
-            android:paddingTop="5dp"
-            android:textColorHint="@android:color/white">
+    </ScrollView>
 
-            <EditText
-                android:id="@+id/new_auction_book_isbn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:ellipsize="end"
-                android:hint="ISBN Number"
-                android:inputType="number"
-                android:maxLines="1"
-
-                android:textColor="@android:color/white" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:background="@drawable/roundedbutton"
-            android:paddingTop="5dp"
-            android:textColorHint="@android:color/white">
-
-            <EditText
-                android:id="@+id/new_auction_book_version"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:ellipsize="end"
-                android:hint="Version"
-                android:inputType="text"
-                android:maxLines="1"
-
-                android:textColor="@android:color/white" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/roundedbutton"
-            android:paddingTop="5dp"
-            android:layout_marginBottom="7dp"
-            android:textColorHint="@android:color/white">
-
-            <EditText
-                android:id="@+id/new_auction_book_condition"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:ellipsize="end"
-                android:hint="Condition"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="@android:color/white" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <ImageButton
-            android:id="@+id/new_auction_book_img_btn"
-            android:layout_width="145dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center"
-            android:background="@null"
-            android:layout_marginBottom="5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_image" />
-
-        <Button
-            android:id="@+id/new_auction_submit_btn"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/roundedbutton_submit"
-            android:text="SUBMIT AUCTION"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
 
 
 

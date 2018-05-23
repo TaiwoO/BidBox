@@ -2,9 +2,11 @@ package finalproject.mobilecomputing.bidbox.Authorization;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://3fa5d485.ngrok.io/auth/register";
+        final String url = getString(R.string.base_url) + "auth/register";
 
 
         register_Button.setOnClickListener(new View.OnClickListener() {
@@ -58,10 +63,21 @@ public class RegistrationActivity extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                System.out.println(response);
+//                                System.out.println(response);
                                 Context context = getApplicationContext();
-                                Toast toast = Toast.makeText(context, response, Toast.LENGTH_LONG);
-                                toast.show();
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response);
+                                    SharedPreferences.Editor editor = context
+                                            .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+                                            .edit();
+                                    editor.putString("token", jsonResponse.getString("token"));
+                                    editor.commit();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+//                                Toast toast = Toast.makeText(context, response, Toast.LENGTH_LONG);
+//                                toast.show();
+
                                 gotoHomeActivity();
                             }
                         },

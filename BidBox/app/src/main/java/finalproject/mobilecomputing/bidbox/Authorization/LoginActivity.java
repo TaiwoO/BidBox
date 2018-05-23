@@ -19,6 +19,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,7 +57,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url ="http://3fa5d485.ngrok.io/auth/login";
+//        final String url = "http://bfe0823c.ngrok.io/auth/login";
+        final String url = getString(R.string.base_url) + "auth/login";
+//        System.out.println("URL IS@@@@@: " + url);
 
         // This listener sends an HTTP Requester when clicking the "Login" button.
         login_Button.setOnClickListener(new View.OnClickListener() {
@@ -66,10 +71,20 @@ public class LoginActivity extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                System.out.println(response);
+//                                System.out.println(response);
                                 Context context = getApplicationContext();
-                                Toast toast = Toast.makeText(context, response, Toast.LENGTH_LONG);
-                                toast.show();
+
+                                try {
+                                    JSONObject jsonResponse = new JSONObject(response);
+                                    SharedPreferences.Editor editor = context
+                                            .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+                                            .edit();
+                                    editor.putString("token", jsonResponse.getString("token"));
+                                    editor.commit();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
                                 gotoHomeActivity();
                             }
                         },
@@ -110,9 +125,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void gotoHomeActivity() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        // Store JSON web token in shared preferences here.
-//        editor.putString();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }

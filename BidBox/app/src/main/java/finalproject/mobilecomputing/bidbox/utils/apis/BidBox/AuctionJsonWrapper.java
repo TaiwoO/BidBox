@@ -53,7 +53,7 @@ public final class AuctionJsonWrapper {
             auction.setAskingPrice(askingPrice);
             auction.setStartDate(startDate);
             auction.setEndDate(endDate);
-            auction.setAuctioneerId(auctioneerId);
+            auction.setAuctioneerUserId(auctioneerId);
 
             return auction;
 

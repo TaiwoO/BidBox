@@ -13,10 +13,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.List;
 
-import finalproject.mobilecomputing.bidbox.adapters.BidItemAdapter;
+import finalproject.mobilecomputing.bidbox.adapters.AuctionItemAdapter;
+import finalproject.mobilecomputing.bidbox.models.Auction;
 import finalproject.mobilecomputing.bidbox.models.Book;
 
 /**
@@ -29,10 +29,10 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
 
     private ActionBar actionBar;
     private TextView bookName, isbnNUm, sellerInfo, sellerEmail;
-    private static BidItemAdapter bidItemAdapter;
+    private static AuctionItemAdapter auctionItemAdapter;
     private List<Book> books;
     private Button bidBtn, purchaseBtn;
-    private Book passBook;
+    private Auction passedAuction;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +62,13 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
 
         //getting Book object
         Intent i = getIntent();
-        passBook=(Book)i.getSerializableExtra("book");
-        Log.d("BidAcvtivity", passBook.toString());
+        passedAuction=(Auction) i.getSerializableExtra("auction");
+        Log.d("BidAcvtivity", passedAuction.toString());
        // bookName.setText(new String(passBook.getName() + passBook.getVersion()));
         //setting object on bid page, based on data that is pass
 
-        bookName.setText(passBook.getName());
-        isbnNUm.setText(passBook.getIsbn());
+        bookName.setText(passedAuction.getBook().getName());
+        isbnNUm.setText(passedAuction.getBook().getIsbn());
 
 
         //setting book

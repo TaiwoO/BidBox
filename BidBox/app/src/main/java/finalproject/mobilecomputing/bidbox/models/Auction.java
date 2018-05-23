@@ -1,5 +1,8 @@
 package finalproject.mobilecomputing.bidbox.models;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -7,27 +10,29 @@ import java.util.List;
  * Created by Taiwo on 5/15/2018.
  */
 
-public class Auction {
+public class Auction implements Serializable {
 
+    @SerializedName("_id")
     private String id;
     private Book book;
     private List<Bid> bids;
     private Double askingPrice;
     private String startDate;
     private String endDate;
-    private String auctioneerId;
+    private String auctioneerUserId;
 
     public Auction() {
 
     }
 
-    public Auction(Book book, List<Bid> bids, Double askingPrice, String startDate, String endDate, String auctioneerId) {
+    public Auction(String id, Book book, List<Bid> bids, Double askingPrice, String startDate, String endDate, String auctioneerUserId) {
+        this.id = id;
         this.book = book;
         this.bids = bids;
         this.askingPrice = askingPrice;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.auctioneerId = auctioneerId;
+        this.auctioneerUserId = auctioneerUserId;
     }
 
     public String getId() {
@@ -78,12 +83,12 @@ public class Auction {
         this.endDate = endDate;
     }
 
-    public String getAuctioneerId() {
-        return auctioneerId;
+    public String getAuctioneerUserId() {
+        return auctioneerUserId;
     }
 
-    public void setAuctioneerId(String auctioneerId) {
-        this.auctioneerId = auctioneerId;
+    public void setAuctioneerUserId(String auctioneerUserId) {
+        this.auctioneerUserId = auctioneerUserId;
     }
 
     @Override
@@ -95,7 +100,7 @@ public class Auction {
                 ", askingPrice=" + askingPrice +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", auctioneerId='" + auctioneerId + '\'' +
+                ", auctioneerUserId='" + auctioneerUserId + '\'' +
                 '}';
     }
 }
