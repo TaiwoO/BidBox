@@ -55,13 +55,13 @@
 
         android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/bid_item_sellerEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="jking@umbc.edu "
+    <!--<TextView-->
+        <!--android:id="@+id/bid_item_sellerEmail"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="jking@umbc.edu "-->
 
-        android:textColor="@android:color/white" />
+        <!--android:textColor="@android:color/white" />-->
 
 
     <LinearLayout
@@ -203,11 +203,12 @@
             android:id="@+id/bidding_purchaseNow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
+            android:layout_gravity="right"
+
             android:background="@drawable/roundedbutton"
             android:text="Purchase"
             android:textColor="@android:color/white"
-            android:layout_marginLeft="75dp"/>
+            />
 
     </LinearLayout>
 
