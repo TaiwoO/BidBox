@@ -14,6 +14,7 @@ public class payment extends AppCompatActivity {
 
     public TextView payment, saved_cards,cardNumber, payment_method, total,price;
     Button button_credit_debit ,  button_campus_card,button_paypal,button_pay;
+    String total_checkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,21 @@ public class payment extends AppCompatActivity {
         //To DO : get total price of books from previous activity.
         //To Do : Set the price to be displayed in "price" field.
         //price.setText("$"+" ------price variable -----");
+        total_checkout = getIntent().getStringExtra("total");
+        if(total_checkout!=null) {
+            price.setText("$" + total_checkout);
+        }
+        else {
+            total_checkout = "55.00";
+            price.setText("$" + total_checkout);
+        }
+
 
         button_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent receipt = new Intent(view.getContext(), finalproject.mobilecomputing.bidbox.receipt.class);
+                receipt.putExtra("total",total_checkout);
                 startActivity(receipt);
 
                 //To Do : send all book details to next activity

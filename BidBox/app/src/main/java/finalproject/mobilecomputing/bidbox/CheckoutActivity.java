@@ -107,13 +107,6 @@ public class CheckoutActivity extends AppCompatActivity {
                     }
 
                     total.setText("$" + (int) sum);
-
-
-
-
-
-
-
                     Log.d(TAG, "good status: " + user.toString());
                 } else {
                     Toast.makeText(mcontext, "Failed to get user info", LENGTH_SHORT).show();

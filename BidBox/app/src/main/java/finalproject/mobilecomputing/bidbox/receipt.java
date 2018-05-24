@@ -10,10 +10,15 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Random;
+
 public class receipt extends AppCompatActivity {
 
     TextView thank_you, ordernumber,orderdetails,totalReceipt, totalPrice;
     Button button_continue;
+    String total_checkout;
+    Random rand = new Random();
+    int order_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,17 @@ public class receipt extends AppCompatActivity {
         totalPrice.setTypeface(customFont_bold);
         button_continue.setTypeface(customFont_bold);
 
-        //To Do : price.setText
+
         //To Do : OrderDetails
-        //To Do : OrderNumber
+
+        order_num = rand.nextInt(9000000) + 1000000;
+        ordernumber.setText("Order#:"+ order_num);
+        total_checkout=getIntent().getStringExtra("total");
+        totalPrice.setText("$"+total_checkout);
+
+        orderdetails.setText("Organic Chemistry 10th Edition \n" +
+                "ISBN# 9812003821903 \n Quantity:1 ----- Price:$25.00 \n \n" +
+                " Advanced Level Computer Science \n ISBN# 532398054190 \n Quantity:1 ----- Price:$30.00");
 
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
