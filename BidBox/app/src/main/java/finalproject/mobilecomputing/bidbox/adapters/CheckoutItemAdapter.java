@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import finalproject.mobilecomputing.bidbox.R;
@@ -89,11 +92,16 @@ public class CheckoutItemAdapter extends ArrayAdapter<Book> implements View.OnCl
 
 
 
-        viewHolder.price.setText("$3.50"); //book.getTimeFormat();
+        viewHolder.price.setText(book.getPrice().toString()); //book.getTimeFormat();
         viewHolder.quantity.setText("1"); //book.getBid(userid?);
        // viewHolder.currentBid.setText("$25.50"); //book.getCurrentBid();
 
-
+        Glide.with(mContext)
+                .load(book.getImgUrl())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.no_image_available_placeholder)
+                        .fitCenter())
+                .into(viewHolder.bookImg);
         //viewHolder.bidBtn.setOnClickListener(this);
         //viewHolder.bidBtn.setTag(position);
         //viewHolder.addToChartBtn.setOnClickListener(this);
