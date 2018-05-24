@@ -27,6 +27,7 @@ function getUser(req, res) {
     
     User.findById(user._id)
         .populate("bids")
+        .populate("shoppingChart")
         .populate({
             path: 'auctions',
             populate: { path: 'bids', }
@@ -50,6 +51,7 @@ function getUserById(req, res) {
 
     User.findById(userid)
         .populate("bids")
+        .populate("shoppingChart")
         .populate({
             path: 'auctions',
             populate: { path: 'bids', }
