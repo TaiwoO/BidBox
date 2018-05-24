@@ -2,25 +2,38 @@ package finalproject.mobilecomputing.bidbox;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import finalproject.mobilecomputing.bidbox.R;
+import finalproject.mobilecomputing.bidbox.adapters.CheckoutItemAdapter;
 import finalproject.mobilecomputing.bidbox.adapters.CurrentBidItemAdapter;
+import finalproject.mobilecomputing.bidbox.api.BidBox.BidBoxApiInterface;
 import finalproject.mobilecomputing.bidbox.models.Book;
+import finalproject.mobilecomputing.bidbox.models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class CurrentBidActivity extends AppCompatActivity {
 
@@ -29,6 +42,8 @@ public class CurrentBidActivity extends AppCompatActivity {
     private List<Book> books;
     private ListView bidItemListView;
     private static CurrentBidItemAdapter currentBidItemAdapter;
+
+    private static final String TAG = "currentbid";
 
     private Button checkout;
 
@@ -74,31 +89,71 @@ public class CurrentBidActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         bidItemListView = (ListView)findViewById(R.id.current_bid_item_listview);
-        books = new ArrayList<>();
-        Book sampleBook = new Book();
-        sampleBook.setIsbn("11112222223333333");
-        sampleBook.setName("Organic Chemistry 10th Edition");
-        Book sampleBook2 = new Book();
-        sampleBook2.setIsbn("999998888877777666");
-        sampleBook2.setName("Advanced Level Computer Science");
-        books.add(sampleBook);
-        books.add(sampleBook2);
-        books.add(sampleBook);
-        books.add(sampleBook2);
-        books.add(sampleBook);
-        books.add(sampleBook2);
-        books.add(sampleBook);
-        books.add(sampleBook2);
-        books.add(sampleBook);
-        books.add(sampleBook2);
+
+        getUserInfo();
+    }
+
+    private void getUserInfo() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String token = pref.getString("token", null);
+        //bidItemListView = (ListView) findViewById(R.id.checkout_item_listview);
+        final Context mcontext = this;
 
 
-        currentBidItemAdapter = new CurrentBidItemAdapter(this, books);
-        bidItemListView.setAdapter(currentBidItemAdapter);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getString(R.string.base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        // Log.d(TAG, "The User: ");
+
+        BidBoxApiInterface bidBoxService = retrofit.create(BidBoxApiInterface.class);
+        Call<User> getUserInfoCall = bidBoxService.getUserInfo(token);
+        getUserInfoCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                double sum = 0;
+                int statusCode = response.code();
+                Log.d(TAG, "on response called: ");
+
+                User user = response.body();
+
+                if (statusCode == 200) {
+                    //Toast.makeText(mcontext, "GOT USER INFO", LENGTH_SHORT).show();
+
+                    books = user.getShoppingChart();
+
+
+                    currentBidItemAdapter = new CurrentBidItemAdapter(mcontext, books);
+                    bidItemListView.setAdapter(currentBidItemAdapter);
+
+
+
+
+
+
+
+
+
+                    Log.d(TAG, "good status: " + user.toString());
+                } else {
+                    Toast.makeText(mcontext, "Failed to get user info", LENGTH_SHORT).show();
+                    Log.d(TAG, "failure");
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d(TAG, "failure");
+                Log.d(TAG, t.getMessage());
+
+            }
+        });
     }
 
     @Override

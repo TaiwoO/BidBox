@@ -100,8 +100,9 @@ public class CurrentBidItemAdapter extends ArrayAdapter<Book> implements View.On
 
 
         viewHolder.timeRemaining.setText("1:57:39"); //book.getTimeFormat();
-        viewHolder.yourBid.setText("$25.50"); //book.getBid(userid?);
-        viewHolder.currentBid.setText("$25.50"); //book.getCurrentBid();
+        viewHolder.yourBid.setText("$ " + Double.toString(book.getPrice()));
+        //viewHolder.yourBid.setText("$25.50"); //book.getBid(userid?);
+        viewHolder.currentBid.setText("$ " + "0.00"); //book.getCurrentBid();
 
 
         //viewHolder.bidBtn.setOnClickListener(this);
