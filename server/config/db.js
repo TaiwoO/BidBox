@@ -4,9 +4,9 @@ const config = require('./config-constants');
 
 let dbURI = config.DATABASE;
 
-// if (process.env.NODE_ENV === 'production') {
-//     dbURI = process.env.THE_PRODUCTION_dB_URI 
-// }
+if (config.NODE_ENV === 'production') {
+    dbURI = config.DATABASE_PRODUCTION;
+}
 
 mongoose.connect(dbURI);
 
