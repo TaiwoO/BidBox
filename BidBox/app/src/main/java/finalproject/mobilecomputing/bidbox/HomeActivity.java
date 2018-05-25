@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         auctionItemListView = (ListView) findViewById(R.id.bid_item_listview);
         addAuctionBtn = (FloatingActionButton) findViewById(R.id.home_add_auction_fab);
