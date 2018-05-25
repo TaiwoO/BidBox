@@ -6,11 +6,18 @@ const router = express.Router();
 
 router.get('/:imgid', (req, res) => {
     const imgid = req.params.imgid;
-    // TODO: Make sure path is valid
-    // console.log(path.join(configConstants.UPLOAD_PATH, imgid));
-    fs.createReadStream(path.join(configConstants.UPLOAD_PATH, imgid)).pipe(res);
+    
+    const file_path= path.join( configConstants.UPLOAD_PATH, imgid)
 
-    // res.sendFile(path.join(configConstants.UPLOAD_PATH, imgid))
+    if (!fs.existsSync(file_path)) {
+        console.log("File doesn't exisit")
+        res.status(404);
+        res.json({message: "image doesnt exisit"});
+        return
+    }
+
+    fs.createReadStream(file_path).pipe(res);
+
 });
 
 module.exports = router;
