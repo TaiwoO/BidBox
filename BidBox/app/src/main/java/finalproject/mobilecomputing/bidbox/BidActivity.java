@@ -155,6 +155,10 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
             case R.id.bidding_purchaseNow:
 
                 //code for purchase now goes here -> should either add to cart or go to checkout page.
+                //should make call to send to prastusha here
+                String requestedBid = new Double(passedAuction.getAskingPrice()).toString();
+                sumbitNewBidForm(passedAuction, requestedBid); //add the new bid
+                gotoPaymentActivity();
                 break;
         }
     }
@@ -264,5 +268,10 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         else{
             return "0";
         }
+    }
+
+    private void gotoPaymentActivity() {
+        Intent intent = new Intent(this, payment.class);
+        startActivity(intent);
     }
 }
