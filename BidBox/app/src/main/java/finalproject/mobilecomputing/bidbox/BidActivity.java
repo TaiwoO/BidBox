@@ -92,7 +92,7 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         //setting object on bid page, based on data that is pass
 
         bookName.setText(passedAuction.getBook().getName());
-        isbnNUm.setText(passedAuction.getBook().getIsbn());
+        isbnNUm.setText("ISBN# " +passedAuction.getBook().getIsbn());
         sellerInfo.setText("Sold By UserID: "+passedAuction.getAuctioneerUserId());
         askingBid.setText("Buy now for: $"+ Double.toString(passedAuction.getAskingPrice()));
         bidRemainingTime.setText(passedAuction.getEndDate());
@@ -293,6 +293,7 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
 
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
+            this.bmImage.setRotation(90);
         }
 
         @Override
