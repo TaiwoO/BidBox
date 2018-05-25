@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
     android:background="@drawable/background_gradient"
     >
 
@@ -27,6 +26,13 @@
             />
 
     </android.support.v7.widget.Toolbar>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    >
 
 
     <TextView
@@ -55,13 +61,13 @@
 
         android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/bid_item_sellerEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="jking@umbc.edu "
+    <!--<TextView-->
+        <!--android:id="@+id/bid_item_sellerEmail"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="jking@umbc.edu "-->
 
-        android:textColor="@android:color/white" />
+        <!--android:textColor="@android:color/white" />-->
 
 
     <LinearLayout
@@ -76,12 +82,14 @@
             android:layout_height="150dp"
             android:layout_marginBottom="35dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/book1" />
+            android:src="@drawable/book1"
+            android:padding="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="20dp">
 
 
             <LinearLayout
@@ -103,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:textSize="9sp"
-                    android:text="2:00:00" />
+                    android:text="" />
 
             </LinearLayout>
 
@@ -160,7 +168,7 @@
                     android:textSize="9sp"
                     android:layout_marginTop="10dp"
                     android:hint="Bid Amount"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
             </LinearLayout>
 
@@ -203,12 +211,15 @@
             android:id="@+id/bidding_purchaseNow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
+            android:layout_gravity="right"
+
             android:background="@drawable/roundedbutton"
             android:text="Purchase"
             android:textColor="@android:color/white"
-            android:layout_marginLeft="75dp"/>
+            />
 
     </LinearLayout>
+
+</LinearLayout>
 
 </LinearLayout>
