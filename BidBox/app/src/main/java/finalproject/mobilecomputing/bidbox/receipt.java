@@ -51,9 +51,10 @@ public class receipt extends AppCompatActivity {
         total_checkout=getIntent().getStringExtra("total");
         totalPrice.setText("$"+total_checkout);
 
-        orderdetails.setText("\n \n Organic Chemistry 10th Edition \n" +
-                "ISBN# 9812003821903 \n Quantity:1 ----- Price:$25.00 \n \n" +
-                " Advanced Level Computer Science \n ISBN# 532398054190 \n Quantity:1 ----- Price:$30.00");
+        //orderdetails.setText("\n \n Organic Chemistry 10th Edition \n" +
+            //    "ISBN# 9812003821903 \n Quantity:1 ----- Price:$25.00 \n \n" +
+            //    " Advanced Level Computer Science \n ISBN# 532398054190 \n Quantity:1 ----- Price:$30.00");
+        orderdetails.setText("\n \n Purchase Successful! ");
 
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
