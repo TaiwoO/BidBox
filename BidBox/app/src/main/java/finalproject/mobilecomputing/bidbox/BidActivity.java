@@ -3,6 +3,9 @@ package finalproject.mobilecomputing.bidbox;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +17,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -94,6 +99,12 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         //error happens here
         currentMaxBid.setText(getCurrentMaxBid(passedAuction));
         //bidding_purchaseNowText
+
+        //setting the image
+        // show The Image in a ImageView
+        String imageUrl = passedAuction.getBook().getImgUrl();
+        new DownloadImageTask((ImageView) findViewById(R.id.bid_item_img))
+                .execute(imageUrl);
 
 
         //template for sending object to checkout
@@ -274,4 +285,33 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         Intent intent = new Intent(this, payment.class);
         startActivity(intent);
     }
+
+    //class for adding image
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 }
+
