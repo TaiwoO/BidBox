@@ -1,6 +1,8 @@
 package finalproject.mobilecomputing.bidbox;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +13,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import finalproject.mobilecomputing.bidbox.adapters.AuctionItemAdapter;
+import finalproject.mobilecomputing.bidbox.api.BidBox.BidBoxApiInterface;
 import finalproject.mobilecomputing.bidbox.models.Auction;
+import finalproject.mobilecomputing.bidbox.models.Bid;
 import finalproject.mobilecomputing.bidbox.models.Book;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by sam m on 5/12/18.
@@ -28,7 +41,8 @@ import finalproject.mobilecomputing.bidbox.models.Book;
 public class BidActivity extends AppCompatActivity implements OnClickListener {
 
     private ActionBar actionBar;
-    private TextView bookName, isbnNUm, sellerInfo, sellerEmail;
+    private TextView bookName, isbnNUm, sellerInfo, sellerEmail, bidRemainingTime, currentMaxBid, askingBid;
+    private EditText insertedBid;
     private static AuctionItemAdapter auctionItemAdapter;
     private List<Book> books;
     private Button bidBtn, purchaseBtn;
@@ -52,8 +66,13 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         bookName = (TextView) findViewById(R.id.bid_item_name);
         isbnNUm = (TextView) findViewById(R.id.bid_item_isbn);
         sellerInfo = (TextView) findViewById(R.id.bid_item_sellerInfo);
-        sellerEmail = (TextView) findViewById(R.id.bid_item_sellerEmail);
+//        sellerEmail = (TextView) findViewById(R.id.bid_item_sellerEmail);
         bidBtn = (Button) findViewById(R.id.bidding_addBid);
+        bidRemainingTime = (TextView) findViewById(R.id.bid_item_timeRemaining);
+        currentMaxBid= (TextView) findViewById(R.id.bid_item_currentBid);
+        askingBid = (TextView) findViewById(R.id.bidding_purchaseNowText);
+        insertedBid = (EditText) findViewById(R.id.bid_insertBidEditText);
+
         bidBtn.setOnClickListener(this);
         purchaseBtn = (Button) findViewById(R.id.bidding_purchaseNow);
         purchaseBtn.setOnClickListener(this);
@@ -69,15 +88,12 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
 
         bookName.setText(passedAuction.getBook().getName());
         isbnNUm.setText(passedAuction.getBook().getIsbn());
+        sellerInfo.setText("Sold By UserID: "+passedAuction.getAuctioneerUserId());
+        askingBid.setText("Buy now for: $"+ Double.toString(passedAuction.getAskingPrice()));
+        bidRemainingTime.setText(passedAuction.getEndDate());
+        currentMaxBid.setText(getCurrentMaxBid(passedAuction));
+        //bidding_purchaseNowText
 
-
-        //setting book
-//        this.id="000";
-//        this.name="TestBook";
-//        this.version="v9";
-//        this.ownerID="sss1";
-//        this.condition="New";
-//        this.isbn="000000";
 
         //template for sending object to checkout
 //        Deneme dene = new Deneme(4,"Mustafa");
@@ -128,11 +144,16 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
             case R.id.bidding_addBid:
 
                 //code to add bid here
+                String newBid = (insertedBid.getText().toString());
+                Log.d("BidAcvtivity-New-Bid", newBid);
+                sumbitNewBidForm(passedAuction, newBid); //add the new bid
+                currentMaxBid.setText(getCurrentMaxBid(passedAuction)); //update currentBid based on highest Bid
+
 
                 break;
             case R.id.bidding_purchaseNow:
 
-                //code for purchase now goes here
+                //code for purchase now goes here -> should either add to cart or go to checkout page.
                 break;
         }
     }
@@ -158,5 +179,81 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    // adding a new bid to an auction
+
+    private void sumbitNewBidForm(Auction auction, String newBid) {
+
+        // User's Json Web Token is needed
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+        String token = pref.getString("token", null);
+
+
+
+        String price = newBid;
+
+        Retrofit retrofit = new Retrofit.Builder()
+
+                .baseUrl(getString(R.string.base_url))
+
+                .addConverterFactory(GsonConverterFactory.create())
+
+                .build();
+
+
+
+        BidBoxApiInterface bidBoxService = retrofit.create(BidBoxApiInterface.class);
+
+        Call<Void> addNewBidCall = bidBoxService.addNewBid(auction.getId(), price, token);
+
+        addNewBidCall.enqueue(new Callback<Void>() {
+
+            @Override
+
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                int statusCode = response.code();
+
+
+
+                if (statusCode == 200) {
+
+                    Toast.makeText(getApplicationContext(), "Bid was added!", Toast.LENGTH_SHORT).show();
+
+
+
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Failed to add bid. Make sure you filled in all fields", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+
+            @Override
+
+            public void onFailure(Call<Void> call, Throwable t) {
+
+
+            }
+
+        });
+
+    }
+
+    //get the current max Bid to be display in current Bid
+    private String getCurrentMaxBid(Auction currentAuction){
+
+        List<Double> Bids= new ArrayList<>();
+
+        for(Bid myBids: currentAuction.getBids()){
+            Bids.add(myBids.getPrice());
+        }
+        String maxBid = Double.toString(Collections.max(Bids));
+        Log.d("BidAcvtivity", maxBid);
+        return maxBid;
     }
 }
