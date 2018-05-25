@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import finalproject.mobilecomputing.bidbox.adapters.AuctionItemAdapter;
 import finalproject.mobilecomputing.bidbox.api.BidBox.BidBoxApiInterface;
@@ -95,8 +96,24 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         isbnNUm.setText("ISBN# " +passedAuction.getBook().getIsbn());
         sellerInfo.setText("Sold By UserID: "+passedAuction.getAuctioneerUserId());
         askingBid.setText("Buy now for: $"+ Double.toString(passedAuction.getAskingPrice()));
-        bidRemainingTime.setText(passedAuction.getEndDate());
-        //error happens here
+        //this is for setting bid remaining time, as this is not set in the dp, this is done randomly, see get random time
+        //please replace with code below if this is fix in dp
+//        if(passedAuction.getEndDate().length()>0){
+//            bidRemainingTime.setText(passedAuction.getEndDate());
+//            String remainingTime1 = getRandomTime();
+//            bidRemainingTime.setText(remainingTime1);
+//            passedAuction.setEndDate(remainingTime1);
+//        }else{
+//
+//        }
+
+
+            String remainingTime1 = getRandomTime();
+            bidRemainingTime.setText(remainingTime1);
+
+
+        //bidRemainingTime.setText(passedAuction.getEndDate()); //code that should get time from db
+
         currentMaxBid.setText(getCurrentMaxBid(passedAuction));
         //bidding_purchaseNowText
 
@@ -155,12 +172,13 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         switch(view.getId()){
             case R.id.bidding_addBid:
 
+                new BidUpdateUITask().execute("");
                 //code to add bid here
-                String newBid = (insertedBid.getText().toString());
-                Log.d("BidAcvtivity-New-Bid", newBid);
-                sumbitNewBidForm(passedAuction, newBid); //add the new bid
-                currentMaxBid.setText(getCurrentMaxBid(passedAuction)); //update currentBid based on highest Bid
+               // String newBid = (insertedBid.getText().toString());
+                //Log.d("BidAcvtivity-New-Bid", newBid);
 
+               // currentMaxBid.setText(getCurrentMaxBid(passedAuction)); //update currentBid based on highest Bid
+               // sumbitNewBidForm(passedAuction, newBid); //add the new bid
 
                 break;
             case R.id.bidding_purchaseNow:
@@ -286,6 +304,16 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         startActivity(intent);
     }
 
+    private String getRandomTime(){
+        Random rand = new Random();
+        int hour = rand.nextInt(23);
+        int minutes = rand.nextInt(59);
+        int seconds = rand.nextInt(59);
+
+        String str = new Integer(hour).toString() + ":"+new Integer(minutes).toString() + ":"+new Integer(seconds).toString();
+        return str;
+    }
+
     //class for adding image
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
@@ -314,5 +342,32 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
             bmImage.setImageBitmap(result);
         }
     }
+
+    private class BidUpdateUITask extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String newBid = (insertedBid.getText().toString());
+            Log.d("BidAcvtivity-New-Bid", newBid);
+            sumbitNewBidForm(passedAuction, newBid); //add the new bid
+            return "completed BidUpdateUITask";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+           // currentMaxBid.setText("$"+getCurrentMaxBid(passedAuction)); //update currentBid based on highest Bid
+        }
+
+        @Override
+        protected void onPreExecute() {
+            String newBid = (insertedBid.getText().toString());
+            currentMaxBid.setText("$"+getCurrentMaxBid(passedAuction)); //update currentBid based on highest Bid
+
+        }
+    }
+
+
 }
 
