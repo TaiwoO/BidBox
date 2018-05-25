@@ -91,6 +91,7 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         sellerInfo.setText("Sold By UserID: "+passedAuction.getAuctioneerUserId());
         askingBid.setText("Buy now for: $"+ Double.toString(passedAuction.getAskingPrice()));
         bidRemainingTime.setText(passedAuction.getEndDate());
+        //error happens here
         currentMaxBid.setText(getCurrentMaxBid(passedAuction));
         //bidding_purchaseNowText
 
@@ -247,13 +248,21 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
     //get the current max Bid to be display in current Bid
     private String getCurrentMaxBid(Auction currentAuction){
 
-        List<Double> Bids= new ArrayList<>();
+        ArrayList<Double> Bids= new ArrayList<>();
 
-        for(Bid myBids: currentAuction.getBids()){
-            Bids.add(myBids.getPrice());
+        if(currentAuction.getBids().size()>0) {
+
+            for (Bid myBids : currentAuction.getBids()) {
+                Bids.add(myBids.getPrice());
+            }
+
+            double myMax = Collections.max(Bids);
+            String maxBid = new Double(myMax).toString();
+            Log.d("BidAcvtivity", maxBid);
+            return maxBid;
         }
-        String maxBid = Double.toString(Collections.max(Bids));
-        Log.d("BidAcvtivity", maxBid);
-        return maxBid;
+        else{
+            return "0";
+        }
     }
 }
