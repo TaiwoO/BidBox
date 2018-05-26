@@ -47,7 +47,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BidActivity extends AppCompatActivity implements OnClickListener {
 
     private ActionBar actionBar;
-    private TextView bookName, isbnNUm, sellerInfo, sellerEmail, bidRemainingTime, currentMaxBid, askingBid;
+    private TextView bookName, isbnNUm, sellerEmail, sellerInfo, bidRemainingTime, currentMaxBid, askingBid;
     private EditText insertedBid;
     private static AuctionItemAdapter auctionItemAdapter;
     private List<Book> books;
@@ -71,7 +71,7 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         //get instance from layout
         bookName = (TextView) findViewById(R.id.bid_item_name);
         isbnNUm = (TextView) findViewById(R.id.bid_item_isbn);
-        sellerInfo = (TextView) findViewById(R.id.bid_item_sellerInfo);
+        //sellerInfo = (TextView) findViewById(R.id.bid_item_sellerInfo);
 //        sellerEmail = (TextView) findViewById(R.id.bid_item_sellerEmail);
         bidBtn = (Button) findViewById(R.id.bidding_addBid);
         bidRemainingTime = (TextView) findViewById(R.id.bid_item_timeRemaining);
@@ -94,7 +94,7 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
 
         bookName.setText(passedAuction.getBook().getName());
         isbnNUm.setText("ISBN# " +passedAuction.getBook().getIsbn());
-        sellerInfo.setText("Sold By UserID: "+passedAuction.getAuctioneerUserId());
+        //sellerInfo.setText("Sold By UserID: "+passedAuction.getAuctioneerUserId());
         askingBid.setText("Buy now for: $"+ Double.toString(passedAuction.getAskingPrice()));
         //this is for setting bid remaining time, as this is not set in the dp, this is done randomly, see get random time
         //please replace with code below if this is fix in dp
@@ -149,13 +149,13 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
         this.isbnNUm = isbnNUm;
     }
 
-    public TextView getSellerInfo() {
-        return sellerInfo;
-    }
+//    public TextView getSellerInfo() {
+//        return sellerInfo;
+//    }
 
-    public void setSellerInfo(TextView sellerInfo) {
-        this.sellerInfo = sellerInfo;
-    }
+//    public void setSellerInfo(TextView sellerInfo) {
+//        this.sellerInfo = sellerInfo;
+//    }
 
     public TextView getSellerEmail() {
         return sellerEmail;
@@ -321,7 +321,8 @@ public class BidActivity extends AppCompatActivity implements OnClickListener {
 
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
-            this.bmImage.setRotation(90);
+            //flip occurs here
+            //this.bmImage.setRotation(90);
         }
 
         @Override

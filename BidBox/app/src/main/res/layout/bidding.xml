@@ -53,13 +53,13 @@
 
         android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/bid_item_sellerInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sold By Janice King "
+    <!--<TextView-->
+        <!--android:id="@+id/bid_item_sellerInfo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Sold By Janice King "-->
 
-        android:textColor="@android:color/white" />
+        <!--android:textColor="@android:color/white" />-->
 
     <!--<TextView-->
         <!--android:id="@+id/bid_item_sellerEmail"-->
