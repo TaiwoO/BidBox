@@ -94,7 +94,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 User user = response.body();
 
                 if (statusCode == 200) {
-                    Toast.makeText(mcontext, "GOT USER INFO", LENGTH_SHORT).show();
+                    //Toast.makeText(mcontext, "GOT USER INFO", LENGTH_SHORT).show();
 
                     books = user.getShoppingChart();
 
@@ -155,8 +155,8 @@ public class CheckoutActivity extends AppCompatActivity {
 
         getUserInfo();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     void startPaymentActivity(double total){
