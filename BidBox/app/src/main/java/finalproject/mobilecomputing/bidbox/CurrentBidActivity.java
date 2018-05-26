@@ -42,7 +42,7 @@ public class CurrentBidActivity extends AppCompatActivity {
     private List<Book> books;
     private ListView bidItemListView;
     private static CurrentBidItemAdapter currentBidItemAdapter;
-
+    private Context context = this;
     private static final String TAG = "currentbid";
 
     private Button checkout;
@@ -78,7 +78,9 @@ public class CurrentBidActivity extends AppCompatActivity {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText( mcontext, "Should go to checkout pg now", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, CheckoutActivity.class);
+                startActivity(intent);
+                //Toast.makeText( mcontext, "Should go to checkout pg now", Toast.LENGTH_SHORT).show();
             }
         });
 
